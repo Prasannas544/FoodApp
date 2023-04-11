@@ -12,7 +12,7 @@ const App = () => {
 
     <NavigationContainer>
       <Stack.Navigator  >
-        <Stack.Screen name="SplashScreen" component={SplashScreen} options={{ headerShown: true }} />
+        <Stack.Screen name="SplashScreen" component={SplashScreen} options={{ headerShown: false }} />
         {/* <Stack.Screen name="Login" component={Login} options={{ headerShown: true }} />
         <Stack.Screen name="Home" component={Home} options={{ headerShown: true }} />
         <Stack.Screen name="Chat" component={Chat} options={{ headerShown: true }} /> */}
