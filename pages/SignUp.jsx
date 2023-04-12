@@ -13,15 +13,23 @@ export default function App() {
     const [password, setPassword] = useState("");
     return (
         <View style={styles.container}>
-            <View style={{ flex: 1, alignSelf: 'flex-start', padding: 30 }}>
+            <View style={{ flex: 1, alignSelf: 'flex-start', paddingHorizontal: 30 ,paddingVertical:10}}>
 
-                <Text style={{ fontFamily: 'Poppins', fontSize: 30, color: '#fff', fontWeight: 900, color: '#121212' }}>Hello,</Text>
-                <Text style={{ fontFamily: 'Poppins', fontSize: 20, color: '#fff', fontWeight: 400, color: '#121212' }}>Welcome Back!</Text>
+                <Text style={{ fontFamily: 'Poppins', fontSize: 20, color: '#fff', fontWeight: 600, color: '#121212' }}>Create an account</Text>
+                <Text style={{ fontFamily: 'Poppins', fontSize: 11, lineHeight:16, color: '#fff', fontWeight: 400, color: '#121212' }}>Let’s help you set up your account,{"\n"}it won’t take long.</Text>
 
 
-            </View>
+                <View style={{width:'100%'}}>
 
-            <View style={{ flex: 3, width: '100%', paddingHorizontal: 30, marginTop: -25 }}>
+                <View style={styles.inputView}>
+                    <Text style={{ fontFamily: 'Poppins', fontSize: 14, color: '#fff', fontWeight: 400, color: '#121212', marginBottom: 5 }}>Name</Text>
+                    <TextInput
+                        style={styles.TextInput}
+                        placeholder=" Enter Name"
+                        placeholderTextColor="#D9D9D9"
+                        onChangeText={(email) => setEmail(email)}
+                    />
+                </View>
                 <View style={styles.inputView}>
                     <Text style={{ fontFamily: 'Poppins', fontSize: 14, color: '#fff', fontWeight: 400, color: '#121212', marginBottom: 5 }}>Email</Text>
                     <TextInput
@@ -40,6 +48,18 @@ export default function App() {
                         secureTextEntry={true}
                         onChangeText={(password) => setPassword(password)}
                     />
+                </View>
+                <View style={styles.inputView}>
+                    <Text style={{ fontFamily: 'Poppins', fontSize: 14, color: '#fff', fontWeight: 400, color: '#121212', marginBottom: 5 }}>Confirm Password</Text>
+                    <TextInput
+                        style={styles.TextInput}
+                        placeholder=" Enter Password"
+                        placeholderTextColor="#D9D9D9"
+                        secureTextEntry={true}
+                        onChangeText={(password) => setPassword(password)}
+                    />
+                </View>
+
                 </View>
 
                 <TouchableOpacity>
