@@ -8,63 +8,68 @@ import {
     Button,
     TouchableOpacity,
 } from "react-native";
-export default function App() {
+// import { CheckBox } from 'react-native-elements';
+
+
+export default function SignUp() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [check, setCheck] = useState(false);
     return (
         <View style={styles.container}>
-            <View style={{ flex: 1, alignSelf: 'flex-start', paddingHorizontal: 30 ,paddingVertical:10}}>
+            <View style={{ flex: 3, alignSelf: 'flex-start', paddingHorizontal: 30, paddingVertical: 10, width: '100%' }}>
 
                 <Text style={{ fontFamily: 'Poppins', fontSize: 20, color: '#fff', fontWeight: 600, color: '#121212' }}>Create an account</Text>
-                <Text style={{ fontFamily: 'Poppins', fontSize: 11, lineHeight:16, color: '#fff', fontWeight: 400, color: '#121212' }}>Let’s help you set up your account,{"\n"}it won’t take long.</Text>
+                <Text style={{ fontFamily: 'Poppins', fontSize: 11, lineHeight: 16, color: '#fff', fontWeight: 400, color: '#121212' }}>Let’s help you set up your account,{"\n"}it won’t take long.</Text>
 
 
-                <View style={{width:'100%'}}>
+                <View style={{ width: '100%', display: 'flex', justifyContent: 'center', marginTop: 15 }}>
 
-                <View style={styles.inputView}>
-                    <Text style={{ fontFamily: 'Poppins', fontSize: 14, color: '#fff', fontWeight: 400, color: '#121212', marginBottom: 5 }}>Name</Text>
-                    <TextInput
-                        style={styles.TextInput}
-                        placeholder=" Enter Name"
-                        placeholderTextColor="#D9D9D9"
-                        onChangeText={(email) => setEmail(email)}
-                    />
-                </View>
-                <View style={styles.inputView}>
-                    <Text style={{ fontFamily: 'Poppins', fontSize: 14, color: '#fff', fontWeight: 400, color: '#121212', marginBottom: 5 }}>Email</Text>
-                    <TextInput
-                        style={styles.TextInput}
-                        placeholder=" Enter Email"
-                        placeholderTextColor="#D9D9D9"
-                        onChangeText={(email) => setEmail(email)}
-                    />
-                </View>
-                <View style={styles.inputView}>
-                    <Text style={{ fontFamily: 'Poppins', fontSize: 14, color: '#fff', fontWeight: 400, color: '#121212', marginBottom: 5 }}>Password</Text>
-                    <TextInput
-                        style={styles.TextInput}
-                        placeholder=" Enter Password"
-                        placeholderTextColor="#D9D9D9"
-                        secureTextEntry={true}
-                        onChangeText={(password) => setPassword(password)}
-                    />
-                </View>
-                <View style={styles.inputView}>
-                    <Text style={{ fontFamily: 'Poppins', fontSize: 14, color: '#fff', fontWeight: 400, color: '#121212', marginBottom: 5 }}>Confirm Password</Text>
-                    <TextInput
-                        style={styles.TextInput}
-                        placeholder=" Enter Password"
-                        placeholderTextColor="#D9D9D9"
-                        secureTextEntry={true}
-                        onChangeText={(password) => setPassword(password)}
-                    />
+                    <View style={styles.inputView}>
+                        <Text style={{ fontFamily: 'Poppins', fontSize: 14, color: '#fff', fontWeight: 400, color: '#121212', marginBottom: 5 }}>Name</Text>
+                        <TextInput
+                            style={styles.TextInput}
+                            placeholder=" Enter Name"
+                            placeholderTextColor="#D9D9D9"
+                            onChangeText={(email) => setEmail(email)}
+                        />
+                    </View>
+                    <View style={styles.inputView}>
+                        <Text style={{ fontFamily: 'Poppins', fontSize: 14, color: '#fff', fontWeight: 400, color: '#121212', marginBottom: 5 }}>Email</Text>
+                        <TextInput
+                            style={styles.TextInput}
+                            placeholder=" Enter Email"
+                            placeholderTextColor="#D9D9D9"
+                            onChangeText={(email) => setEmail(email)}
+                        />
+                    </View>
+                    <View style={styles.inputView}>
+                        <Text style={{ fontFamily: 'Poppins', fontSize: 14, color: '#fff', fontWeight: 400, color: '#121212', marginBottom: 5 }}>Password</Text>
+                        <TextInput
+                            style={styles.TextInput}
+                            placeholder=" Enter Password"
+                            placeholderTextColor="#D9D9D9"
+                            secureTextEntry={true}
+                            onChangeText={(password) => setPassword(password)}
+                        />
+                    </View>
+                    <View style={styles.inputView}>
+                        <Text style={{ fontFamily: 'Poppins', fontSize: 14, color: '#fff', fontWeight: 400, color: '#121212', marginBottom: 5 }}>Confirm Password</Text>
+                        <TextInput
+                            style={styles.TextInput}
+                            placeholder=" Retype Password"
+                            placeholderTextColor="#D9D9D9"
+                            secureTextEntry={true}
+                            onChangeText={(password) => setPassword(password)}
+                        />
+                    </View>
                 </View>
 
+                <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginTop: 20, paddingHorizontal: 10 }}>
+                    <View style={{ borderWidth: 1, borderRadius: 5, borderColor: '#FF9C00', width: 17, height: 17 }}></View>
+                    <Text style={{ color: '#FF9C00', fontFamily: 'Poppins', fontStyle: 'normal', fontSize: 11, lineHeight: 16, fontWeight: 400, textAlign: 'left', paddingHorizontal: 5 }} >Accept terms & Condition</Text>
                 </View>
 
-                <TouchableOpacity>
-                    <Text style={{ color: '#FF9C00', fontFamily: 'Poppins', fontStyle: 'normal', fontSize: 11, lineHeight: 16, fontWeight: 400, textAlign: 'left', marginTop: 20, paddingHorizontal: 10 }} >Forgot Password?</Text>
-                </TouchableOpacity>
 
                 <TouchableOpacity style={{ marginTop: 30 }} >
                     <View style={{ backgroundColor: '#129575', borderRadius: 10, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', paddingVertical: 15, paddingHorizontal: 50 }}>
@@ -77,8 +82,9 @@ export default function App() {
 
 
             <View style={{ flex: 1 }} >
+                <Image style={{ width: 195, height: 17 }} resizeMode='contain' source={require('../assets/Line.png')} />
 
-                <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'flex-start', gap: 15, marginTop: -50 }}>
+                <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'flex-start', gap: 15, marginTop: 15 }}>
                     <View elevation={5} style={{
                         backgroundColor: '#FFFFFF',
                         shadowColor: '#696969',
@@ -101,10 +107,10 @@ export default function App() {
                     }}>
                         <Image source={require('../assets/facebook.png')} style={{ width: 24, height: 24 }} resizeMode='contain' /></View>
                 </View>
-                <View style={{ display: 'flex', flexDirection: 'row', marginTop: 15 }}>
-                    <Text style={{ color: '#000000', fontFamily: 'Poppins', fontStyle: 'normal', fontSize: 11, lineHeight: 16, fontWeight: 400, textAlign: 'center' }}>Dont have an account ? </Text>
+                <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', marginTop: 15 }}>
+                    <Text style={{ color: '#000000', fontFamily: 'Poppins', fontStyle: 'normal', fontSize: 11, lineHeight: 16, fontWeight: 400, textAlign: 'center' }}>Already a member ? </Text>
                     <TouchableOpacity>
-                        <Text style={{ color: '#FF9C00', fontFamily: 'Poppins', fontStyle: 'normal', fontSize: 11, lineHeight: 16, fontWeight: 400, textAlign: 'center' }}>Sign Up</Text>
+                        <Text style={{ color: '#FF9C00', fontFamily: 'Poppins', fontStyle: 'normal', fontSize: 11, lineHeight: 16, fontWeight: 400, textAlign: 'center' }}>Sign In</Text>
                     </TouchableOpacity>
                 </View>
 
@@ -119,12 +125,9 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
     },
-    image: {
-        marginBottom: 40,
-    },
     inputView: {
         width: '100%',
-        marginTop: 30
+        marginTop: 10
     },
     TextInput: {
         width: '100%',

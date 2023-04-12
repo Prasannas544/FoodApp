@@ -8,7 +8,8 @@ import {
     Button,
     TouchableOpacity,
 } from "react-native";
-export default function App() {
+
+export default function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     return (
@@ -56,9 +57,11 @@ export default function App() {
 
 
 
-            <View style={{ flex: 1 }} >
+            <View style={{ flex: 1, marginTop: -70 }} >
+                <Image style={{ width: 195, height: 17 ,marginBottom:15}} resizeMode='contain' source={require('../assets/Line.png')} />
 
-                <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'flex-start', gap: 15, marginTop: -50 }}>
+
+                <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'flex-start', gap: 15, }}>
                     <View elevation={5} style={{
                         backgroundColor: '#FFFFFF',
                         shadowColor: '#696969',
