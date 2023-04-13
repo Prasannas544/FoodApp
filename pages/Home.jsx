@@ -1,10 +1,11 @@
-import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { ImageBackground, StyleSheet, Text, TextInput, TouchableOpacity, View, ScrollView } from 'react-native'
 import React, { useState } from 'react'
 import { Image } from 'react-native-elements'
+import Dish from './Dish'
 
 
 const Home = () => {
- 
+
     const [cuisine, setcuisine] = useState(['Indian', 'Chinese', 'Italian', 'Spanish'])
     const [selectedcuisine, setselectedcuisine] = useState(['All'])
 
@@ -53,10 +54,22 @@ const Home = () => {
                     )
                 })}
             </View>
-            <View style={{ flex: 3, display: 'flex', flexDirection: 'row', paddingHorizontal: 25 }}>
-         
+            <View style={{ flex: 3, display: 'flex', flexDirection: 'row', paddingHorizontal: 25, }}>
+
+                <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+                    <Dish />
+                    <Dish />
+                    <Dish />
+                    <Dish />
+                </ScrollView>
+
             </View>
-            <View style={{ flex: 3, display: 'flex', flexDirection: 'row', paddingHorizontal: 25 }}></View>
+            <View style={{ flex: 3, display: 'flex', flexDirection: 'row', paddingHorizontal: 25 }}>
+
+                <ScrollView horizontal={true}>
+
+                </ScrollView>
+            </View>
             <View style={{ flex: 1, marginBottom: 15 }}>
                 <View style={{ display: 'flex', alignSelf: 'center' }}>
 
@@ -70,7 +83,7 @@ const Home = () => {
 
                 <View>
 
-                    <Image source={require('../assets/Bg.png')} style={{ width: '100%', height: 50, display: 'flex', flexDirection: 'row', justifyContent: 'space-around', paddingTop: 12 }} >
+                    <ImageBackground source={require('../assets/Bg.png')} style={{ width: '100%', height: 50, display: 'flex', flexDirection: 'row', justifyContent: 'space-around', paddingTop: 12 }} >
                         <TouchableOpacity>
                             <Image source={require('../assets/Home.png')} style={{ width: 24, height: 24 }} />
                         </TouchableOpacity>
@@ -88,7 +101,7 @@ const Home = () => {
 
 
 
-                    </Image>
+                    </ImageBackground>
                 </View>
 
             </View>
