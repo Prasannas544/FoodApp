@@ -8,6 +8,7 @@ import SignUp from './pages/SignUp'
 import Home from './pages/Home'
 import { StyleSheet } from 'react-native'
 import Search from './pages/Search'
+import SearchResult from './pages/SearchResult'
 
 const Stack = createStackNavigator()
 
@@ -18,7 +19,8 @@ const App = () => {
 
     <NavigationContainer>
       <Stack.Navigator  >
-        <Stack.Screen name="Search" component={Search} options={{ headerShown: false }} />
+        <Stack.Screen name="SearchResult" component={SearchResult} options={{ headerShown: false }} />
+        {/* <Stack.Screen name="Search" component={Search} options={{ headerShown: false }} /> */}
         {/* <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} /> */}
         {/* <Stack.Screen name="SignUp" component={SignUp} options={{ headerShown: false }} /> */}
         {/* <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} /> */}
