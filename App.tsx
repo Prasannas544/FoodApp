@@ -6,6 +6,7 @@ import SplashScreen from './pages/SplashScreen'
 import Login from './pages/Login'
 import SignUp from './pages/SignUp'
 import Home from './pages/Home'
+import { StyleSheet } from 'react-native'
 
 const Stack = createStackNavigator()
 
@@ -29,3 +30,9 @@ const App = () => {
 }
 
 export default App
+
+const styles = StyleSheet.create({
+  title: {
+    fontFamily: 'Poppins',
+  }
+})

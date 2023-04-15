@@ -2,6 +2,7 @@ import { ImageBackground, StyleSheet, Text, TextInput, TouchableOpacity, View, S
 import React, { useState } from 'react'
 import { Image } from 'react-native-elements'
 import Dish from './Dish'
+import Recipes from './Recipes'
 
 
 const Home = () => {
@@ -11,7 +12,7 @@ const Home = () => {
 
     return (
         <View style={{ flex: 1, paddingTop: 20, }}>
-            <View style={{ flex: 1, display: 'flex', flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 25 }}>
+            <View style={{ flex: 1, display: 'flex', flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 25 ,marginBottom:15}}>
                 <View>
                     <Text style={{ fontSize: 20, fontWeight: '600', fontFamily: 'Poppins', lineHeight: 30, color: '#000000' }}>Hello Fola</Text>
                     <Text style={{ fontSize: 11, fontWeight: '400', fontFamily: 'Poppins', lineHeight: 16, color: '#A9A9A9' }}>What are you cooking today ?</Text>
@@ -54,7 +55,7 @@ const Home = () => {
                     )
                 })}
             </View>
-            <View style={{ flex: 3, display: 'flex', flexDirection: 'row', paddingHorizontal: 25, }}>
+            <View style={{ flex: 4, display: 'flex', flexDirection: 'row', paddingHorizontal: 25}}>
 
                 <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                     <Dish />
@@ -64,13 +65,17 @@ const Home = () => {
                 </ScrollView>
 
             </View>
-            <View style={{ flex: 3, display: 'flex', flexDirection: 'row', paddingHorizontal: 25 }}>
-
-                <ScrollView horizontal={true}>
-
+            <View style={{ flex: 3, display: 'flex', flexDirection: 'column', paddingHorizontal: 25,marginTop:10 }}>
+                <Text style={{
+                    fontSize: 16, fontWeight: '800', fontFamily: 'Poppins',
+                    lineHeight: 20, color: '#000000',paddingBottom:0}}>New Recipes</Text>
+                <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+                    <Recipes />
+                    <Recipes />
+                    <Recipes />
                 </ScrollView>
             </View>
-            <View style={{ flex: 1, marginBottom: 15 }}>
+            <View style={{ flex: 2,marginBottom:-20 }}>
                 <View style={{ display: 'flex', alignSelf: 'center' }}>
 
                     <TouchableOpacity style={{
@@ -83,7 +88,7 @@ const Home = () => {
 
                 <View>
 
-                    <ImageBackground source={require('../assets/Bg.png')} style={{ width: '100%', height: 50, display: 'flex', flexDirection: 'row', justifyContent: 'space-around', paddingTop: 12 }} >
+                    <ImageBackground source={require('../assets/Bg.png')} style={{ width: '100%', height: 60, display: 'flex', flexDirection: 'row', justifyContent: 'space-around', paddingTop: 12 }} >
                         <TouchableOpacity>
                             <Image source={require('../assets/Home.png')} style={{ width: 24, height: 24 }} />
                         </TouchableOpacity>
