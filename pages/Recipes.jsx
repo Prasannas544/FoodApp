@@ -23,7 +23,7 @@ const Recipes = () => {
                     <Text style={{
                         color: '#484848', fontSize: 16, lineHeight: 21, fontWeight: 700, fontFamily: 'Poppins',
                         paddingHorizontal: 10, paddingVertical: 10, textAlign: 'left'
-                    }}>Classic Greek Salad</Text>
+                    }}>Steak with tomato...</Text>
                 </View>
 
                 <View style={{ display: 'flex', flexDirection: 'row', paddingLeft: 10, paddingBottom: 5, gap: 2 }}>
