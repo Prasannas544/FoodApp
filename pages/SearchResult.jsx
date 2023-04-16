@@ -67,10 +67,11 @@ const Search = () => {
 
             </View>
 
-            <Modal isVisible={showModal} style={{
-                position: 'absolute', width: '100%', left: -20, height: 430, top: 328,
-                borderRadius: 50, backgroundColor: '#FFF', paddingBottom: 20
-             }}>
+            <Modal isVisible={showModal}
+                onBackdropPress={toggleModal} style={{
+                    position: 'absolute', width: '100%', left: -20, height: 430, top: 328,
+                    borderRadius: 50, backgroundColor: '#FFF', paddingBottom: 20
+                }}>
                 <View style={{ flex: 1, padding: 10, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'center' }}>
 
 
