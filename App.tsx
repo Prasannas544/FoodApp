@@ -11,6 +11,8 @@ import Search from './pages/Search'
 import SearchResult from './pages/SearchResult'
 import SavedRecipe from './pages/SavedRecipe'
 import Notifications from './pages/Notifications'
+import Profile from './pages/Profile'
+import Recipe_Ingredient from './pages/Recipe_Ingredient'
 
 const Stack = createStackNavigator()
 
@@ -21,7 +23,9 @@ const App = () => {
 
     <NavigationContainer>
       <Stack.Navigator  >
-        <Stack.Screen name="Notifications" component={Notifications} options={{ headerShown: false }} />
+        <Stack.Screen name="Recipe_Ingredient" component={Recipe_Ingredient} options={{ headerShown: false }} />
+        {/* <Stack.Screen name="Profile" component={Profile} options={{ headerShown: false }} /> */}
+        {/* <Stack.Screen name="Notifications" component={Notifications} options={{ headerShown: false }} /> */}
         {/* <Stack.Screen name="SavedRecipe" component={SavedRecipe} options={{ headerShown: false }} /> */}
         {/* <Stack.Screen name="SearchResult" component={SearchResult} options={{ headerShown: false }} /> */}
         {/* <Stack.Screen name="Search" component={Search} options={{ headerShown: false }} /> */}

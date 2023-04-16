@@ -2,26 +2,61 @@ import { View, Text, TouchableOpacity, Image, ScrollView } from 'react-native'
 import React, { useState } from 'react'
 import { ImageBackground } from 'react-native'
 import SavedRecipeCard from './SavedRecipeCard'
-import AlertCard from './AlertCard'
 
 const SavedRecipe = () => {
 
-    const [today, settoday] = useState([1, 2, 3])
-    const [filter, setfilter] = useState(['All', 'Read', 'Unread'])
-    const [yesterday, setyesterday] = useState([1, 2, 3, 4, 5, 6, 7])
+    const [myRecipes, setMyRecipes] = useState([1, 2, 3, 5, 4])
+    const [filter, setfilter] = useState(['Recipe', 'Videos', 'Tag'])
+
 
     return (
         <View style={{ flex: 1, backgroundColor: '#FFF' }}>
             <View style={{ paddingHorizontal: 30, paddingTop: 10 }}>
+
                 <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
                     <Text style={{ fontFamily: 'Poppins', fontSize: 18, fontWeight: 800, lineHeight: 27, color: '#121212', marginLeft: -5 }}>Notifications</Text>
-
                 </View>
 
+                <View style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                    <View style={{ width: '100%', display: 'flex', padding: 5, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+                        <View >
+                            <Image source={require('../assets/rando_dp.png')} style={{ width: 99, height: 99, borderRadius: 50 }} resizeMode='contain' />
+                        </View>
+                        <View>
+                            <Text style={{ fontFamily: 'Poppins', fontSize: 11, fontWeight: 400, lineHeight: 16, color: '#A9A9A9', }}>Recipe</Text>
+                            <Text style={{ fontFamily: 'Poppins', fontSize: 20, fontWeight: 700, lineHeight: 30, color: '#121212', }}>4</Text>
+                        </View>
+                        <View>
+                            <Text style={{ fontFamily: 'Poppins', fontSize: 11, fontWeight: 400, lineHeight: 16, color: '#A9A9A9', }}>Followers</Text>
+                            <Text style={{ fontFamily: 'Poppins', fontSize: 20, fontWeight: 700, lineHeight: 30, color: '#121212', }}>2.5M</Text>
+                        </View>
+                        <View>
+                            <Text style={{ fontFamily: 'Poppins', fontSize: 11, fontWeight: 400, lineHeight: 16, color: '#A9A9A9', }}>Following</Text>
+                            <Text style={{ fontFamily: 'Poppins', fontSize: 20, fontWeight: 700, lineHeight: 30, color: '#121212', }}>269</Text>
+                        </View>
+                    </View>
+                    <View style={{ padding: 5 }}>
+                        <Text style={{ fontFamily: 'Poppins', fontSize: 16, fontWeight: 700, lineHeight: 24, color: '#121212', }}>Afuwape Abiodun</Text>
+                        <Text style={{ fontFamily: 'Poppins', fontSize: 11, fontWeight: 400, lineHeight: 16, color: '#A9A9A9', }}>Chef</Text>
+                    </View>
+                    <View style={{ padding: 5 }}>
+                        <Text style={{ fontFamily: 'Poppins', fontSize: 11, fontWeight: 400, lineHeight: 16, color: '#797979', }}>
+                            Private Chef
+                        </Text>
+                        <Text style={{ fontFamily: 'Poppins', fontSize: 11, fontWeight: 400, lineHeight: 16, color: '#797979', }}>
+                            Passionate about food and life 🥘🍲🍝🍱
+                        </Text>
+                    </View>
+                </View>
+
+
+            </View>
+
+            <View style={{ marginTop: 15, paddingHorizontal: 30 }}>
                 <View style={{ marginTop: 10, display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'stretch' }} >
                     {filter.map((item, i) => {
                         return (
-                            <TouchableOpacity key={i} style={{ flexGrow: 1, backgroundColor: '#129575', borderRadius: 10, paddingVertical: 7,display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', }}>
+                            <TouchableOpacity key={i} style={{ flexGrow: 1, backgroundColor: '#129575', borderRadius: 10, paddingVertical: 7, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', }}>
                                 <View style={{}}>
                                     <Text style={{ color: '#FFF', fontFamily: 'Poppins', fontStyle: 'normal', fontSize: 11, lineHeight: 16, fontWeight: 600, textAlign: 'center' }}>
                                         {item}
@@ -31,33 +66,19 @@ const SavedRecipe = () => {
                         )
                     })}
                 </View>
-
-
-                <View style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                <View style={{ marginTop: 10, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
 
                     <ScrollView showsVerticalScrollIndicator={false} vertical={true} contentContainerStyle={{ paddingBottom: 150, alignItems: 'center' }} >
-                        <Text>Today</Text>
-                        {today.map((item, i) => {
+                        {myRecipes.map((item, i) => {
                             return (
                                 <View style={{ marginVertical: 10 }} key={i}>
-                                    <AlertCard />
+                                    <SavedRecipeCard />
                                 </View>)
                         })}
-                        <Text>Yeseterday</Text>
-                        {yesterday.map((item, i) => {
-                            return (
-                                <View style={{ marginVertical: 10 }} key={i}>
-                                    <AlertCard />
-                                </View>)
-                        })}
-
-
                     </ScrollView>
                 </View>
 
-
             </View>
-
 
 
             {/* Bottom Navbar */}

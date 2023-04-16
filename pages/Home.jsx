@@ -87,11 +87,11 @@ const Home = () => {
                     </TouchableOpacity>
                 </View>
 
+                {/* Bottom Navbar */}
                 <View>
-
                     <ImageBackground source={require('../assets/Bg.png')} style={{ width: '100%', height: 60, display: 'flex', flexDirection: 'row', justifyContent: 'space-around', paddingTop: 12 }} >
                         <TouchableOpacity>
-                            <Image source={require('../assets/Home.png')} style={{ width: 24, height: 24 }} />
+                            <Image source={require('../assets/home-2.png')} style={{ width: 24, height: 24 }} />
                         </TouchableOpacity>
                         <TouchableOpacity>
                             <Image source={require('../assets/Inactive.png')} style={{ width: 24, height: 24 }} />
@@ -104,9 +104,6 @@ const Home = () => {
                         <TouchableOpacity>
                             <Image source={require('../assets/profile.png')} style={{ width: 24, height: 24 }} />
                         </TouchableOpacity>
-
-
-
                     </ImageBackground>
                 </View>
 

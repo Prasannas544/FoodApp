@@ -52,7 +52,7 @@ const SavedRecipe = () => {
                             <Image source={require('../assets/Home.png')} style={{ width: 24, height: 24 }} />
                         </TouchableOpacity>
                         <TouchableOpacity>
-                            <Image source={require('../assets/Inactive.png')} style={{ width: 24, height: 24 }} />
+                            <Image source={require('../assets/Active.png')} style={{ width: 24, height: 24 }} />
                         </TouchableOpacity>
                         <View></View>
 
