@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { ImageBackground } from 'react-native'
 import SavedRecipeCard from './SavedRecipeCard'
 
-const SavedRecipe = () => {
+const SavedRecipe = ({navigation}) => {
 
     const [savedRecipes, setSavedRecipes] = useState([1, 2, 3, 4, 5, 6, 7])
 
@@ -48,18 +48,17 @@ const SavedRecipe = () => {
                 </View>
                 <View>
                     <ImageBackground source={require('../assets/Bg.png')} style={{ width: '100%', height: 60, display: 'flex', flexDirection: 'row', justifyContent: 'space-around', paddingTop: 12 }} >
-                        <TouchableOpacity>
+                    <TouchableOpacity onPress={()=>{navigation.navigate('Home')}}>
                             <Image source={require('../assets/Home.png')} style={{ width: 24, height: 24 }} />
                         </TouchableOpacity>
-                        <TouchableOpacity>
+                        <TouchableOpacity >
                             <Image source={require('../assets/Active.png')} style={{ width: 24, height: 24 }} />
                         </TouchableOpacity>
                         <View></View>
-
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={()=>{navigation.navigate('Notifications')}}>
                             <Image source={require('../assets/notif.png')} style={{ width: 24, height: 24 }} />
                         </TouchableOpacity>
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={()=>{navigation.navigate('Profile')}}>
                             <Image source={require('../assets/profile.png')} style={{ width: 24, height: 24 }} />
                         </TouchableOpacity>
                     </ImageBackground>

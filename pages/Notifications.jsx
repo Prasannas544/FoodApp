@@ -4,12 +4,16 @@ import { ImageBackground } from 'react-native'
 import SavedRecipeCard from './SavedRecipeCard'
 import AlertCard from './AlertCard'
 
-const SavedRecipe = () => {
+const SavedRecipe = ({ navigation }) => {
 
     const [today, settoday] = useState([1, 2, 3])
     const [filter, setfilter] = useState(['All', 'Read', 'Unread'])
+    const [selectedF, setSelectedF] = useState('All')
     const [yesterday, setyesterday] = useState([1, 2, 3, 4, 5, 6, 7])
 
+    const handleClick = (value) => {
+        setSelectedF(value);
+    }
     return (
         <View style={{ flex: 1, backgroundColor: '#FFF' }}>
             <View style={{ paddingHorizontal: 30, paddingTop: 10 }}>
@@ -21,13 +25,29 @@ const SavedRecipe = () => {
                 <View style={{ marginTop: 10, display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'stretch' }} >
                     {filter.map((item, i) => {
                         return (
-                            <TouchableOpacity key={i} style={{ flexGrow: 1, backgroundColor: '#129575', borderRadius: 10, paddingVertical: 7,display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', }}>
-                                <View style={{}}>
-                                    <Text style={{ color: '#FFF', fontFamily: 'Poppins', fontStyle: 'normal', fontSize: 11, lineHeight: 16, fontWeight: 600, textAlign: 'center' }}>
-                                        {item}
-                                    </Text>
-                                </View>
-                            </TouchableOpacity>
+                            <>
+                                {item == selectedF ? <TouchableOpacity key={i} style={{
+                                    flexGrow: 1, backgroundColor: '#129575',
+                                    borderRadius: 10, paddingVertical: 7, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center',
+                                }}>
+                                    <View style={{}}>
+                                        <Text style={{ color: '#FFF', fontFamily: 'Poppins', fontStyle: 'normal', fontSize: 11, lineHeight: 16, fontWeight: 600, textAlign: 'center' }}>
+                                            {item}
+                                        </Text>
+                                    </View>
+                                </TouchableOpacity>
+                                    :
+                                    <TouchableOpacity onPress={() => handleClick(item)} key={i} style={{
+                                        flexGrow: 1, backgroundColor: '#FFF',
+                                        borderRadius: 10, paddingVertical: 7, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center',
+                                    }}>
+                                        <View style={{}}>
+                                            <Text style={{ color: '#129575', fontFamily: 'Poppins', fontStyle: 'normal', fontSize: 11, lineHeight: 16, fontWeight: 600, textAlign: 'center' }}>
+                                                {item}
+                                            </Text>
+                                        </View>
+                                    </TouchableOpacity>}
+                            </>
                         )
                     })}
                 </View>
@@ -73,18 +93,17 @@ const SavedRecipe = () => {
                 </View>
                 <View>
                     <ImageBackground source={require('../assets/Bg.png')} style={{ width: '100%', height: 60, display: 'flex', flexDirection: 'row', justifyContent: 'space-around', paddingTop: 12 }} >
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={() => { navigation.navigate('Home') }}>
                             <Image source={require('../assets/Home.png')} style={{ width: 24, height: 24 }} />
                         </TouchableOpacity>
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={() => { navigation.navigate('SavedRecipe') }}>
                             <Image source={require('../assets/Inactive.png')} style={{ width: 24, height: 24 }} />
                         </TouchableOpacity>
                         <View></View>
-
-                        <TouchableOpacity>
+                        <TouchableOpacity >
                             <Image source={require('../assets/notif_active.png')} style={{ width: 24, height: 24 }} />
                         </TouchableOpacity>
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={() => { navigation.navigate('Profile') }}>
                             <Image source={require('../assets/profile.png')} style={{ width: 24, height: 24 }} />
                         </TouchableOpacity>
                     </ImageBackground>

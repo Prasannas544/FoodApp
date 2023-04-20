@@ -5,10 +5,14 @@ import Dish from './Dish'
 import Recipes from './Recipes'
 
 
-const Home = () => {
+const Home = ({ navigation }) => {
 
-    const [cuisine, setcuisine] = useState(['Indian', 'Chinese', 'Italian', 'Spanish'])
-    const [selectedcuisine, setselectedcuisine] = useState(['All'])
+    const [cuisine, setcuisine] = useState(['All', 'Indian', 'Chinese', 'Italian', 'Spanish'])
+    const [selectedcuisine, setselectedcuisine] = useState('All')
+
+    const handleCuisineClick = (value) => {
+        setselectedcuisine(value);
+    }
 
     return (
         <View style={{ flex: 1, paddingTop: 20, }}>
@@ -24,7 +28,7 @@ const Home = () => {
                     <Image source={require('../assets/search-normal.png')} style={{ width: 18, height: 18 }} />
                     <TextInput style={{ padding: 10, height: 40 }} placeholderTextColor='#D9D9D9' placeholder='Search recipe'></TextInput>
                 </View>
-                <TouchableOpacity style={{ paddingHorizontal: 5 }} >
+                <TouchableOpacity style={{ paddingHorizontal: 5 }} onPress={()=> navigation.navigate('Search')}>
                     <View style={{ backgroundColor: '#129575', borderRadius: 10, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', padding: 10 }}>
                         <Image source={require('../assets/setting-4.png')} resizeMode='contain' style={{ height: 20, width: 20 }} />
 
@@ -32,26 +36,27 @@ const Home = () => {
                 </TouchableOpacity>
             </View>
             <View style={{ marginTop: 25, flex: 1, display: 'flex', flexDirection: 'row', paddingHorizontal: 25 }} >
-                {selectedcuisine.map((item, i) => {
-                    return (
-                        <TouchableOpacity key={i}>
-                            <View style={{ backgroundColor: '#129575', borderRadius: 10, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', paddingVertical: 7, paddingHorizontal: 20 }}>
-                                <Text style={{ color: '#FFF', fontFamily: 'Poppins', fontStyle: 'normal', fontSize: 11, lineHeight: 16, fontWeight: 600, textAlign: 'center' }}>
-                                    {item}
-                                </Text>
-                            </View>
-                        </TouchableOpacity>
-                    )
-                })}
+
                 {cuisine.map((item, i) => {
                     return (
-                        <TouchableOpacity key={i}>
-                            <View style={{ backgroundColor: '#FFFFFF', borderRadius: 10, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', paddingVertical: 7, paddingHorizontal: 20 }}>
-                                <Text style={{ color: '#129575', fontFamily: 'Poppins', fontStyle: 'normal', fontSize: 11, lineHeight: 16, fontWeight: 600, textAlign: 'center' }}>
-                                    {item}
-                                </Text>
-                            </View>
-                        </TouchableOpacity>
+                        <>
+                            {item == selectedcuisine ?
+                                <TouchableOpacity key={i}>
+                                    <View style={{ backgroundColor: '#129575', borderRadius: 10, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', paddingVertical: 7, paddingHorizontal: 20 }}>
+                                        <Text style={{ color: '#FFF', fontFamily: 'Poppins', fontStyle: 'normal', fontSize: 11, lineHeight: 16, fontWeight: 600, textAlign: 'center' }}>
+                                            {item}
+                                        </Text>
+                                    </View>
+                                </TouchableOpacity>
+                                : <TouchableOpacity key={i} onPress={()=>handleCuisineClick(item)}>
+                                    <View style={{ backgroundColor: '#FFFFFF', borderRadius: 10, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', paddingVertical: 7, paddingHorizontal: 20 }}>
+                                        <Text style={{ color: '#129575', fontFamily: 'Poppins', fontStyle: 'normal', fontSize: 11, lineHeight: 16, fontWeight: 600, textAlign: 'center' }}>
+                                            {item}
+                                        </Text>
+                                    </View>
+                                </TouchableOpacity>}
+                        </>
+
                     )
                 })}
             </View>
@@ -93,15 +98,14 @@ const Home = () => {
                         <TouchableOpacity>
                             <Image source={require('../assets/home-2.png')} style={{ width: 24, height: 24 }} />
                         </TouchableOpacity>
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={() => { navigation.navigate('SavedRecipe') }}>
                             <Image source={require('../assets/Inactive.png')} style={{ width: 24, height: 24 }} />
                         </TouchableOpacity>
                         <View></View>
-
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={() => { navigation.navigate('Notifications') }}>
                             <Image source={require('../assets/notif.png')} style={{ width: 24, height: 24 }} />
                         </TouchableOpacity>
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={() => { navigation.navigate('Profile') }}>
                             <Image source={require('../assets/profile.png')} style={{ width: 24, height: 24 }} />
                         </TouchableOpacity>
                     </ImageBackground>

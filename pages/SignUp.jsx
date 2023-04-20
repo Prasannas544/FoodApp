@@ -11,13 +11,22 @@ import {
 // import { CheckBox } from 'react-native-elements';
 
 
-export default function SignUp() {
+export default function SignUp({ navigation }) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [check, setCheck] = useState(false);
+
+    const handleSignIn = () => {
+        navigation.replace('Login');
+    }
+    const handleSignUp = () => {
+        console.log('account created successfully')
+        navigation.replace('Login');
+    }
+
     return (
         <View style={styles.container}>
-            <View style={{ flex: 3, alignSelf: 'flex-start', paddingHorizontal: 30, paddingVertical: 10, width: '100%' }}>
+            <View style={{ alignSelf: 'flex-start', paddingHorizontal: 30, paddingVertical: 10, width: '100%' }}>
 
                 <Text style={{ fontFamily: 'Poppins', fontSize: 20, color: '#fff', fontWeight: 600, color: '#121212' }}>Create an account</Text>
                 <Text style={{ fontFamily: 'Poppins', fontSize: 11, lineHeight: 16, color: '#fff', fontWeight: 400, color: '#121212' }}>Let’s help you set up your account,{"\n"}it won’t take long.</Text>
@@ -71,7 +80,7 @@ export default function SignUp() {
                 </View>
 
 
-                <TouchableOpacity style={{ marginTop: 30 }} >
+                <TouchableOpacity style={{ marginTop: 30 }} onPress={handleSignUp} >
                     <View style={{ backgroundColor: '#129575', borderRadius: 10, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', paddingVertical: 15, paddingHorizontal: 50 }}>
                         <Text style={{ fontFamily: 'Poppins', fontSize: 16, color: '#fff', fontWeight: 600 }}>Sign In </Text>
                         <Image source={require('../assets/ArrowRight.png')} resizeMode='contain' style={{ height: 20, width: 20 }} />
@@ -79,9 +88,7 @@ export default function SignUp() {
                 </TouchableOpacity>
             </View>
 
-
-
-            <View style={{ flex: 1 }} >
+            <View >
                 <Image style={{ width: 195, height: 17 }} resizeMode='contain' source={require('../assets/Line.png')} />
 
                 <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'flex-start', gap: 15, marginTop: 15 }}>
@@ -107,15 +114,16 @@ export default function SignUp() {
                     }}>
                         <Image source={require('../assets/facebook.png')} style={{ width: 24, height: 24 }} resizeMode='contain' /></View>
                 </View>
+
                 <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', marginTop: 15 }}>
                     <Text style={{ color: '#000000', fontFamily: 'Poppins', fontStyle: 'normal', fontSize: 11, lineHeight: 16, fontWeight: 400, textAlign: 'center' }}>Already a member ? </Text>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={handleSignIn}>
                         <Text style={{ color: '#FF9C00', fontFamily: 'Poppins', fontStyle: 'normal', fontSize: 11, lineHeight: 16, fontWeight: 400, textAlign: 'center' }}>Sign In</Text>
                     </TouchableOpacity>
                 </View>
 
             </View>
-        </View >
+    </View >
     );
 }
 const styles = StyleSheet.create({
@@ -123,7 +131,7 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: "#fff",
         alignItems: "center",
-        justifyContent: "center",
+        justifyContent: "space-around",
     },
     inputView: {
         width: '100%',

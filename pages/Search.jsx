@@ -2,13 +2,13 @@ import { View, Text, TouchableOpacity, TextInput, Image, ScrollView } from 'reac
 import React, { useState } from 'react'
 import SearchResultCard from './SearchResultCard'
 
-const Search = () => {
+const Search = ({navigation}) => {
     const [recentSearch, setRecentSearch] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12,])
 
     return (
         <View style={{ flex: 1, paddingHorizontal: 30, paddingTop: 10 }}>
             <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-                <Image source={require('../assets/arrow-left.png')} style={{ width: 20, height: 20 }} />
+                <TouchableOpacity onPress={()=>navigation.goBack()}><Image source={require('../assets/arrow-left.png')} style={{ width: 20, height: 20 }} /></TouchableOpacity>
                 <Text style={{ fontFamily: 'Poppins', fontSize: 18, fontWeight: 800, lineHeight: 27, color: '#121212', marginLeft: -5 }}>Search Recipes</Text>
                 <View></View>
             </View>

@@ -9,12 +9,28 @@ import {
     TouchableOpacity,
 } from "react-native";
 
-export default function Login() {
+export default function Login({ navigation }) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+
+    const handleSignUp = () => {
+        navigation.replace('SignUp')
+    }
+
+    const handleSignIn = () => {
+        // user auth check here
+        let check = true;
+        if (check) {
+            navigation.replace('Home')
+        } else {
+            console.log('user not found')
+        }
+    }
+
+
     return (
         <View style={styles.container}>
-            <View style={{ flex: 1, alignSelf: 'flex-start', padding: 30 }}>
+            <View style={{ alignSelf: 'flex-start', padding: 30 }}>
 
                 <Text style={{ fontFamily: 'Poppins', fontSize: 30, color: '#fff', fontWeight: 900, color: '#121212' }}>Hello,</Text>
                 <Text style={{ fontFamily: 'Poppins', fontSize: 20, color: '#fff', fontWeight: 400, color: '#121212' }}>Welcome Back!</Text>
@@ -22,7 +38,7 @@ export default function Login() {
 
             </View>
 
-            <View style={{ flex: 3, width: '100%', paddingHorizontal: 30, marginTop: -25 }}>
+            <View style={{ width: '100%', paddingHorizontal: 30, }}>
                 <View style={styles.inputView}>
                     <Text style={{ fontFamily: 'Poppins', fontSize: 14, color: '#fff', fontWeight: 400, color: '#121212', marginBottom: 5 }}>Email</Text>
                     <TextInput
@@ -47,7 +63,7 @@ export default function Login() {
                     <Text style={{ color: '#FF9C00', fontFamily: 'Poppins', fontStyle: 'normal', fontSize: 11, lineHeight: 16, fontWeight: 400, textAlign: 'left', marginTop: 20, paddingHorizontal: 10 }} >Forgot Password?</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={{ marginTop: 30 }} >
+                <TouchableOpacity style={{ marginTop: 30 }} onPress={handleSignIn} >
                     <View style={{ backgroundColor: '#129575', borderRadius: 10, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', paddingVertical: 15, paddingHorizontal: 50 }}>
                         <Text style={{ fontFamily: 'Poppins', fontSize: 16, color: '#fff', fontWeight: 600 }}>Sign In </Text>
                         <Image source={require('../assets/ArrowRight.png')} resizeMode='contain' style={{ height: 20, width: 20 }} />
@@ -57,8 +73,8 @@ export default function Login() {
 
 
 
-            <View style={{ flex: 1, marginTop: -70 }} >
-                <Image style={{ width: 195, height: 17 ,marginBottom:15}} resizeMode='contain' source={require('../assets/Line.png')} />
+            <View style={{}} >
+                <Image style={{ width: 195, height: 17, marginBottom: 15 }} resizeMode='contain' source={require('../assets/Line.png')} />
 
 
                 <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'flex-start', gap: 15, }}>
@@ -86,12 +102,13 @@ export default function Login() {
                 </View>
                 <View style={{ display: 'flex', flexDirection: 'row', marginTop: 15 }}>
                     <Text style={{ color: '#000000', fontFamily: 'Poppins', fontStyle: 'normal', fontSize: 11, lineHeight: 16, fontWeight: 400, textAlign: 'center' }}>Dont have an account ? </Text>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={handleSignUp}>
                         <Text style={{ color: '#FF9C00', fontFamily: 'Poppins', fontStyle: 'normal', fontSize: 11, lineHeight: 16, fontWeight: 400, textAlign: 'center' }}>Sign Up</Text>
                     </TouchableOpacity>
                 </View>
 
             </View>
+
         </View >
     );
 }
@@ -100,7 +117,7 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: "#fff",
         alignItems: "center",
-        justifyContent: "center",
+        justifyContent: "space-evenly",
     },
     image: {
         marginBottom: 40,
