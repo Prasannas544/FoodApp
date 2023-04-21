@@ -26,9 +26,9 @@ const Home = ({ navigation }) => {
             <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 25 }}>
                 <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', borderColor: '#D9D9D9', borderWidth: 1, borderRadius: 10, backgroundColor: '#FFFFFF', minWidth: '70%', paddingLeft: 10 }}>
                     <Image source={require('../assets/search-normal.png')} style={{ width: 18, height: 18 }} />
-                    <TextInput style={{ padding: 10, height: 40 }} placeholderTextColor='#D9D9D9' placeholder='Search recipe'></TextInput>
+                    <TextInput onPressIn={() => navigation.navigate('Search')} style={{ padding: 10, height: 40 }} placeholderTextColor='#D9D9D9' placeholder='Search recipe'></TextInput>
                 </View>
-                <TouchableOpacity style={{ paddingHorizontal: 5 }} onPress={()=> navigation.navigate('Search')}>
+                <TouchableOpacity style={{ paddingHorizontal: 5 }} onPress={()=> navigation.navigate('SearchResult')}>
                     <View style={{ backgroundColor: '#129575', borderRadius: 10, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', padding: 10 }}>
                         <Image source={require('../assets/setting-4.png')} resizeMode='contain' style={{ height: 20, width: 20 }} />
 
@@ -48,7 +48,7 @@ const Home = ({ navigation }) => {
                                         </Text>
                                     </View>
                                 </TouchableOpacity>
-                                : <TouchableOpacity key={i} onPress={()=>handleCuisineClick(item)}>
+                                : <TouchableOpacity key={i} onPress={() => handleCuisineClick(item)}>
                                     <View style={{ backgroundColor: '#FFFFFF', borderRadius: 10, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', paddingVertical: 7, paddingHorizontal: 20 }}>
                                         <Text style={{ color: '#129575', fontFamily: 'Poppins', fontStyle: 'normal', fontSize: 11, lineHeight: 16, fontWeight: 600, textAlign: 'center' }}>
                                             {item}

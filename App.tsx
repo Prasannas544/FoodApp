@@ -24,12 +24,12 @@ const App = () => {
     <NavigationContainer>
       <Stack.Navigator  >
 
-        <Stack.Screen name="Notifications" component={Notifications} options={{ headerShown: false }} />
         <Stack.Screen name="SplashScreen" component={SplashScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="Notifications" component={Notifications} options={{ headerShown: false }} />
         <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
         <Stack.Screen name="SignUp" component={SignUp} options={{ headerShown: false }} />
         <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
-        <Stack.Screen name="Recipe_Ingredient" component={Recipe_Ingredient} options={{ headerShown: false }} />
+      <Stack.Screen name="Recipe_Ingredient" component={Recipe_Ingredient} options={{ headerShown: false }} />
         <Stack.Screen name="Profile" component={Profile} options={{ headerShown: false }} />
         <Stack.Screen name="SavedRecipe" component={SavedRecipe} options={{ headerShown: false }} />
         <Stack.Screen name="SearchResult" component={SearchResult} options={{ headerShown: false }} />

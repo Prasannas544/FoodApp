@@ -1,11 +1,32 @@
-import { View, Text, ImageBackground, Image, TouchableOpacity } from 'react-native'
+import { View, Text, ImageBackground, PanResponder, Image, TouchableOpacity } from 'react-native'
 import React from 'react'
 import LinearGradient from 'react-native-linear-gradient';
+import { useNavigation } from '@react-navigation/native';
 
+const DOUBLE_TAP_DELAY = 300; // in milliseconds
 
 const SavedRecipeCard = () => {
+    const navigation = useNavigation()
+    const lastTapRef = React.useRef(0);
+
+    const panResponder = React.useRef(
+        PanResponder.create({
+            onStartShouldSetPanResponder: () => true,
+            onPanResponderTerminationRequest: () => false,
+            onPanResponderRelease: (_, gestureState) => {
+                const now = Date.now();
+
+                if (now - lastTapRef.current <= DOUBLE_TAP_DELAY) {
+                    navigation.navigate('Recipe_Ingredient')
+                } else {
+                    lastTapRef.current = now;
+                }
+            },
+        })
+    ).current;
+
     return (
-        <View style={{ borderRadius: 10, overflow: 'hidden' }}>
+        <View style={{ borderRadius: 10, overflow: 'hidden' }} {...panResponder.panHandlers} >
             <ImageBackground style={{
                 width: 315, height: 150
             }} source={require('../assets/searchR.png')}>

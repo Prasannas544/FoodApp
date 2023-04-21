@@ -4,11 +4,13 @@ import RecipeCard from './RecipeCard'
 import ProcedureCard from './ProcedureCard'
 import Modal from 'react-native-modal'
 import { useClipboard } from '@react-native-community/clipboard'
+import IngredientCard from './IngredientCard'
 
-const Recipe_Ingredient = () => {
+const Recipe_Ingredient = ({ navigation }) => {
     const [clipboard_value, setString] = useClipboard();
 
     const [filter, setfilter] = useState(['Ingredient', 'Procedure'])
+    const [selectedF, setselectedF] = useState('Ingredient')
     const [ingredients, setingredients] = useState([1, 2, 3, 4, 5, 6, 7])
     const [showModal, setShowModal] = useState(false)
     const [showRateModal, setShowRateModal] = useState(false)
@@ -25,7 +27,7 @@ const Recipe_Ingredient = () => {
     };
 
     const copyToClipboard = () => {
-        let text = 'helloWorld' //url goes here
+        let text = 'www.gulugulu' //url goes here
         setString(text);
         console.log(clipboard_value)
     };
@@ -34,7 +36,9 @@ const Recipe_Ingredient = () => {
     return (
         <View style={{ flex: 1, paddingHorizontal: 30, paddingTop: 10 }}>
             <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-                <Image source={require('../assets/arrow-left.png')} style={{ width: 20, height: 20 }} />
+                <TouchableOpacity onPress={() => navigation.goBack()}>
+                    <Image source={require('../assets/arrow-left.png')} style={{ width: 20, height: 20 }} />
+                </TouchableOpacity>
                 <TouchableOpacity onPress={toggleModal}>
                     <Image source={require('../assets/more.png')} style={{ width: 24, height: 24 }} />
                 </TouchableOpacity>
@@ -85,13 +89,26 @@ const Recipe_Ingredient = () => {
                 <View style={{ marginTop: 10, display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'stretch' }} >
                     {filter.map((item, i) => {
                         return (
-                            <TouchableOpacity key={i} style={{ flexGrow: 1, backgroundColor: '#129575', borderRadius: 10, paddingVertical: 8, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', }}>
-                                <View style={{}}>
-                                    <Text style={{ color: '#FFF', fontFamily: 'Poppins', fontStyle: 'normal', fontSize: 11, lineHeight: 16, fontWeight: 600, textAlign: 'center' }}>
-                                        {item}
-                                    </Text>
-                                </View>
-                            </TouchableOpacity>
+                            <>{item == selectedF ?
+                                <TouchableOpacity key={i} style={{ flexGrow: 1, backgroundColor: '#129575', borderRadius: 10, paddingVertical: 8, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', }}>
+                                    <View style={{}}>
+                                        <Text style={{ color: '#FFF', fontFamily: 'Poppins', fontStyle: 'normal', fontSize: 11, lineHeight: 16, fontWeight: 600, textAlign: 'center' }}>
+                                            {item}
+                                        </Text>
+                                    </View>
+                                </TouchableOpacity>
+                                :
+                                <TouchableOpacity onPress={() => setselectedF(item)} key={i} style={{
+                                    flexGrow: 1, backgroundColor: '#FFF', borderRadius: 10, paddingVertical: 8,
+                                    display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center',
+                                }}>
+                                    <View style={{}}>
+                                        <Text style={{ color: '#129575', fontFamily: 'Poppins', fontStyle: 'normal', fontSize: 11, lineHeight: 16, fontWeight: 600, textAlign: 'center' }}>
+                                            {item}
+                                        </Text>
+                                    </View>
+                                </TouchableOpacity>
+                            }</>
                         )
                     })}
                 </View>
@@ -107,8 +124,10 @@ const Recipe_Ingredient = () => {
                 {ingredients.map((item, i) => {
                     return (
                         <View key={i} style={{ marginVertical: 5, width: '100%' }}>
-                            {/* <IngredientCard /> */}
-                            <ProcedureCard />
+                            {
+                                selectedF == 'Ingredient' ? <IngredientCard /> : <ProcedureCard />
+                            }
+
                         </View>
 
                     )

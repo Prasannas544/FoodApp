@@ -21,7 +21,7 @@ const Search = ({navigation}) => {
                     <Image source={require('../assets/search-normal.png')} style={{ width: 18, height: 18 }} />
                     <TextInput style={{ padding: 10, height: 40 }} placeholderTextColor='#D9D9D9' placeholder='Search recipe'></TextInput>
                 </View>
-                <TouchableOpacity style={{ paddingHorizontal: 5 }} >
+                <TouchableOpacity onPress={()=> navigation.navigate('SearchResult')} style={{ paddingHorizontal: 5 }} >
                     <View style={{ backgroundColor: '#129575', borderRadius: 10, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', padding: 10 }}>
                         <Image source={require('../assets/setting-4.png')} resizeMode='contain' style={{ height: 20, width: 20 }} />
                     </View>
