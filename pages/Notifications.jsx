@@ -1,7 +1,6 @@
 import { View, Text, TouchableOpacity, Image, ScrollView } from 'react-native'
 import React, { useState } from 'react'
 import { ImageBackground } from 'react-native'
-import SavedRecipeCard from './SavedRecipeCard'
 import AlertCard from './AlertCard'
 
 const SavedRecipe = ({ navigation }) => {

@@ -4,6 +4,7 @@ import Modal from 'react-native-modal'
 import { useClipboard } from '@react-native-community/clipboard'
 import { useSelector, useDispatch } from 'react-redux';
 import { addBm, removeBm } from '../redux/reducers/BookmarkSlice';
+import { addRating, removeRating } from '../redux/reducers/RatingSlice';
 
 import RecipeCard from './RecipeCard'
 import ProcedureCard from './ProcedureCard'
@@ -28,6 +29,7 @@ const Recipe_Ingredient = ({ navigation, route }) => {
     const [ingredients, setingredients] = useState([1, 2, 3, 4, 5, 6, 7])
     const [showModal, setShowModal] = useState(false)
     const [showRateModal, setShowRateModal] = useState(false)
+    const [rating, setRating] = useState(5)
     const [showShareModal, setShowShareModal] = useState(false)
 
     const toggleModal = () => {
@@ -141,10 +143,7 @@ const Recipe_Ingredient = ({ navigation, route }) => {
                         route.params.ingredients.map((item, i) => {
                             return (
                                 <View key={i} style={{ marginVertical: 5, width: '100%' }}>
-
                                     <IngredientCard ing={item} />
-
-
                                 </View>
 
                             )
@@ -156,10 +155,7 @@ const Recipe_Ingredient = ({ navigation, route }) => {
                             route.params.procedure.map((item, i) => {
                                 return (
                                     <View key={i} style={{ marginVertical: 5, width: '100%' }}>
-
                                         <ProcedureCard step={item} idx={i} />
-
-
                                     </View>
 
                                 )
@@ -217,24 +213,24 @@ const Recipe_Ingredient = ({ navigation, route }) => {
                     </View>
 
                     <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-evenly', width: '70%' }}>
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={() => setRating(1)}>
                             <Text>⭐</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={() => setRating(2)}>
                             <Text>⭐</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={() => setRating(3)}>
                             <Text>⭐</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={() => setRating(4)}>
                             <Text>⭐</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={() => setRating(5)}>
                             <Text>⭐</Text>
                         </TouchableOpacity>
                     </View>
 
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={() => { dispatch(addRating(route.params.name, rating)) }}>
 
                         <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                             <Text style={{

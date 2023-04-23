@@ -2,10 +2,11 @@ import { View, Text, TouchableOpacity, Image, ScrollView } from 'react-native'
 import React, { useState } from 'react'
 import { ImageBackground } from 'react-native'
 import SavedRecipeCard from './SavedRecipeCard'
+import data from '../data/data.json'
 
 const SavedRecipe = ({ navigation }) => {
 
-    const [myRecipes, setMyRecipes] = useState([1, 2, 3, 5, 4])
+    const [myRecipes, setMyRecipes] = useState(data)
     const [filter, setfilter] = useState(['Recipe', 'Videos', 'Tag'])
     const [selectedF, setSelectedF] = useState('Recipe')
 
@@ -91,7 +92,7 @@ const SavedRecipe = ({ navigation }) => {
                         {myRecipes.map((item, i) => {
                             return (
                                 <View style={{ marginVertical: 10 }} key={i}>
-                                    <SavedRecipeCard />
+                                    <SavedRecipeCard data={item} />
                                 </View>)
                         })}
                     </ScrollView>
