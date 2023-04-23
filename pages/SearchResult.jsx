@@ -1,11 +1,12 @@
-import { View, Text, TouchableOpacity, TextInput, Image, ScrollView, Button } from 'react-native'
+import { View, Text, TouchableOpacity, TextInput, Image, ScrollView, Button, FlatList } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import SearchResultCard from './SearchResultCard'
 import Modal from "react-native-modal";
 
+import data from '../data/data.json'
 
 const Search = ({ navigation }) => {
-    const [recentSearch, setRecentSearch] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12,])
+    const [recentSearch, setRecentSearch] = useState(data)
     const [showModal, setShowModal] = useState(false)
     const [time, setTime] = useState(['All', 'Newest', 'Oldest', 'Popularity'])
     const [selectedtime, setselectedtime] = useState(['All'])
@@ -65,7 +66,9 @@ const Search = ({ navigation }) => {
             setselectedtime(array);
         }
     }
-
+    const renderItem = ({ item }) => (
+        <SearchResultCard data={item} />
+    );
     return (
         <View style={{ flex: 1 }}>
             <View style={{ paddingHorizontal: 30, paddingTop: 10 }}>
@@ -103,18 +106,14 @@ const Search = ({ navigation }) => {
                             lineHeight: 16, color: '#A9A9A9',
                         }}>269 results</Text>
                     </View>
-                    <ScrollView showsVerticalScrollIndicator={false} vertical={true} >
-                        {recentSearch.map((item, i) => {
-                            return (
-                                <View key={i} style={{ display: 'flex', flexDirection: 'row' }}>
-                                    <SearchResultCard />
-                                    <SearchResultCard />
-                                </View>
-                            )
-                        })
+                    <FlatList style={{ height: '79%' }}
+                        data={recentSearch}
+                        renderItem={renderItem}
+                        numColumns={2}
+                        scrollEnabled={true}
+                        showsVerticalScrollIndicator={false}
+                    />
 
-                        }
-                    </ScrollView>
                 </View>
 
 

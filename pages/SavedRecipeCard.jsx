@@ -4,8 +4,25 @@ import LinearGradient from 'react-native-linear-gradient';
 import { useNavigation } from '@react-navigation/native';
 
 const DOUBLE_TAP_DELAY = 300; // in milliseconds
+var img
+const SavedRecipeCard = ({ data }) => {
 
-const SavedRecipeCard = () => {
+    const imageSelector = () => {
+        if (data?.img == 'searchR1') {
+            img = require('../assets/searchR1.png')
+        }
+        if (data?.img == 'searchR2') {
+            img = require('../assets/searchR2.png')
+        }
+        if (data?.img == 'searchR3') {
+            img = require('../assets/searchR3.png')
+        }
+        if (data?.img == 'searchR4') {
+            img = require('../assets/searchR4.png')
+        }
+    }
+    imageSelector()
+
     const navigation = useNavigation()
     const lastTapRef = React.useRef(0);
 
@@ -17,7 +34,7 @@ const SavedRecipeCard = () => {
                 const now = Date.now();
 
                 if (now - lastTapRef.current <= DOUBLE_TAP_DELAY) {
-                    navigation.navigate('Recipe_Ingredient')
+                    navigation.navigate('Recipe_Ingredient',data)
                 } else {
                     lastTapRef.current = now;
                 }
@@ -29,7 +46,7 @@ const SavedRecipeCard = () => {
         <View style={{ borderRadius: 10, overflow: 'hidden' }} {...panResponder.panHandlers} >
             <ImageBackground style={{
                 width: 315, height: 150
-            }} source={require('../assets/searchR.png')}>
+            }} source={img}>
                 <LinearGradient colors={['rgba(0, 0, 0, 0)', '#000000']}
                     start={{ x: 0.5, y: 0 }}
                     end={{ x: 0.5, y: 1 }} style={{ flex: 1 }}>
@@ -41,7 +58,7 @@ const SavedRecipeCard = () => {
                                 backgroundColor: '#FFE1B3', gap: 5, borderRadius: 20, display: 'flex', flexDirection: 'row', alignItems: 'center'
                             }}>
                                 <Image source={require('../assets/star.png')} style={{ height: 10, width: 10 }} />
-                                <Text style={{ color: '#000000', fontSize: 11, lineHeight: 16, fontFamily: 'Poppins' }}>4.5</Text>
+                                <Text style={{ color: '#000000', fontSize: 11, lineHeight: 16, fontFamily: 'Poppins' }}>{data.rating}</Text>
                             </View>
                         </View>
 
@@ -49,12 +66,12 @@ const SavedRecipeCard = () => {
                     </View>
                     <View style={{ position: 'absolute', bottom: 0, padding: 10, width: '100%' }}>
                         <Text style={{ color: '#FFFFFF', fontSize: 14, lineHeight: 21, fontFamily: 'Poppins', fontWeight: 700 }}>
-                            Traditional spare ribs baked</Text>
+                            {data.name}</Text>
 
 
                         <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                             <Text style={{ color: '#D9D9D9', fontSize: 8, lineHeight: 12, fontFamily: 'Poppins', fontWeight: 400 }}>
-                                By Chef John
+                                By Chef {data.chef}
                             </Text>
                             <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                                 <Image source={require('../assets/timer.png')} style={{ height: 17, width: 17 }} />
@@ -62,7 +79,7 @@ const SavedRecipeCard = () => {
                                 <Text style={{
                                     color: '#A9A9A9', fontSize: 11, lineHeight: 16, fontWeight: 400, fontFamily: 'Poppins',
                                     paddingLeft: 5, paddingRight: 10, textAlign: 'left'
-                                }}>20 mins</Text>
+                                }}>{data.time} mins</Text>
                                 <View>
                                     <TouchableOpacity style={{ backgroundColor: '#FFF', padding: 4, borderRadius: 50 }}>
                                         <Image source={require('../assets/Bookmarked.png')} style={{ width: 16, height: 16 }} />

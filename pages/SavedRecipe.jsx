@@ -3,9 +3,13 @@ import React, { useState } from 'react'
 import { ImageBackground } from 'react-native'
 import SavedRecipeCard from './SavedRecipeCard'
 
+import data from '../data/data.json'
+
 const SavedRecipe = ({ navigation }) => {
 
-    const [savedRecipes, setSavedRecipes] = useState([1, 2, 3, 4, 5, 6, 7])
+    const [savedRecipes, setSavedRecipes] = useState(data)
+
+    
 
     return (
         <View style={{ flex: 1, backgroundColor: '#FFF' }}>
@@ -22,7 +26,7 @@ const SavedRecipe = ({ navigation }) => {
                         {savedRecipes.map((item, i) => {
                             return (
                                 <View style={{ marginVertical: 10 }} key={i}>
-                                    <SavedRecipeCard />
+                                    <SavedRecipeCard data={item} />
                                 </View>)
                         })}
 

@@ -6,7 +6,7 @@ import Modal from 'react-native-modal'
 import { useClipboard } from '@react-native-community/clipboard'
 import IngredientCard from './IngredientCard'
 
-const Recipe_Ingredient = ({ navigation }) => {
+const Recipe_Ingredient = ({ navigation, route }) => {
     const [clipboard_value, setString] = useClipboard();
 
     const [filter, setfilter] = useState(['Ingredient', 'Procedure'])
@@ -45,11 +45,11 @@ const Recipe_Ingredient = ({ navigation }) => {
             </View>
             <View>
                 <View style={{ paddingTop: 10, borderRadius: 10 }}>
-                    <RecipeCard />
+                    <RecipeCard data={route.params} />
                 </View>
 
                 <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', paddingTop: 10, width: '100%' }}>
-                    <Text style={{ flex: 0.7, color: '#000000', fontSize: 14, lineHeight: 21, fontWeight: 700, fontFamily: 'Poppins', }}>Spicy chicken burger with French fries</Text>
+                    <Text style={{ flex: 0.7, color: '#000000', fontSize: 14, lineHeight: 21, fontWeight: 700, fontFamily: 'Poppins', }}>{route.params.name}</Text>
                     <Text style={{ flex: 0.3, color: '#A9A9A9', fontSize: 14, lineHeight: 21, fontWeight: 400, fontFamily: 'Poppins' }}>
                         ( 13k reviews )</Text>
                 </View>
@@ -65,7 +65,7 @@ const Recipe_Ingredient = ({ navigation }) => {
                         <Text style={{
                             color: '#121212', fontFamily: 'Poppins', fontStyle: 'normal',
                             fontSize: 14, lineHeight: 21, fontWeight: 700, textAlign: 'center'
-                        }}>Laura Wilson</Text>
+                        }}>{route.params.chef}</Text>
                         <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                             <Image source={require('../assets/location.png')} style={{ width: 17, height: 17 }} />
 
@@ -118,20 +118,41 @@ const Recipe_Ingredient = ({ navigation }) => {
                     <Image source={require('../assets/Icon.png')} style={{ width: 17, marginRight: 5 }} resizeMode='contain' />
                     <Text >1 serve</Text>
                 </View>
-                <Text>10 items</Text>
+                <Text>{route.params.ingredients.length}</Text>
             </View>
             <ScrollView style={{ flex: 2 }} showsVerticalScrollIndicator={false} vertical={true} contentContainerStyle={{ alignItems: 'center', paddingBottom: 50 }}>
-                {ingredients.map((item, i) => {
-                    return (
-                        <View key={i} style={{ marginVertical: 5, width: '100%' }}>
-                            {
-                                selectedF == 'Ingredient' ? <IngredientCard /> : <ProcedureCard />
-                            }
+                {selectedF == 'Ingredient' ?
+                    <>{
+                        route.params.ingredients.map((item, i) => {
+                            return (
+                                <View key={i} style={{ marginVertical: 5, width: '100%' }}>
 
-                        </View>
+                                    <IngredientCard ing={item} />
 
-                    )
-                })}
+
+                                </View>
+
+                            )
+                        })}
+                    </>
+                    :
+                    <>
+                        {
+                            route.params.procedure.map((item, i) => {
+                                return (
+                                    <View key={i} style={{ marginVertical: 5, width: '100%' }}>
+
+                                        <ProcedureCard step={item} idx={i} />
+
+
+                                    </View>
+
+                                )
+                            })
+                        }
+                    </>
+                }
+
             </ScrollView>
 
             <Modal isVisible={showModal} animationIn='slideInRight' animationOut='slideOutRight' onBackdropPress={toggleModal}

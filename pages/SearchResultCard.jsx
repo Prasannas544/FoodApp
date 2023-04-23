@@ -1,14 +1,53 @@
-import { View, Text, ImageBackground, Image } from 'react-native'
-import React from 'react'
+import { View, Text, ImageBackground, PanResponder, Image } from 'react-native'
+import React, { useEffect } from 'react'
 import LinearGradient from 'react-native-linear-gradient';
+import { useNavigation } from '@react-navigation/native';
+
+var img = require('../assets/searchR1.png')
+const DOUBLE_TAP_DELAY = 300; // in milliseconds
+
+const SearchResultCard = ({ data }) => {
+    const navigation = useNavigation()
+    const lastTapRef = React.useRef(0);
+
+    const panResponder = React.useRef(
+        PanResponder.create({
+            onStartShouldSetPanResponder: () => true,
+            onPanResponderTerminationRequest: () => false,
+            onPanResponderRelease: (_, gestureState) => {
+                const now = Date.now();
+
+                if (now - lastTapRef.current <= DOUBLE_TAP_DELAY) {
+                    navigation.navigate('Recipe_Ingredient',data)
+                } else {
+                    lastTapRef.current = now;
+                }
+            },
+        })
+    ).current;
+
+    const imageSelector = () => {
+        if (data?.img == 'searchR1') {
+            img = require('../assets/searchR1.png')
+        }
+        if (data?.img == 'searchR2') {
+            img = require('../assets/searchR2.png')
+        }
+        if (data?.img == 'searchR3') {
+            img = require('../assets/searchR3.png')
+        }
+        if (data?.img == 'searchR4') {
+            img = require('../assets/searchR4.png')
+        }
+    }
+    imageSelector()
 
 
-const SearchResultCard = () => {
     return (
-        <View>
+        <View style={{ borderRadius: 10, overflow: 'hidden' }} {...panResponder.panHandlers} >
             <ImageBackground style={{
                 width: 150, height: 150, margin: 7, borderRadius: 10,
-            }} source={require('../assets/searchR.png')}>
+            }} source={img}>
                 <LinearGradient colors={['rgba(0, 0, 0, 0)', '#000000']}
                     start={{ x: 0.5, y: 0 }}
                     end={{ x: 0.5, y: 1 }} style={{ flex: 1, borderRadius: 10 }}>
@@ -20,7 +59,7 @@ const SearchResultCard = () => {
                                 backgroundColor: '#FFE1B3', gap: 5, borderRadius: 20, display: 'flex', flexDirection: 'row', alignItems: 'center'
                             }}>
                                 <Image source={require('../assets/star.png')} style={{ height: 10, width: 10 }} />
-                                <Text style={{ color: '#000000', fontSize: 11, lineHeight: 16, fontFamily: 'Poppins' }}>4.5</Text>
+                                <Text style={{ color: '#000000', fontSize: 11, lineHeight: 16, fontFamily: 'Poppins' }}>{data?.rating}</Text>
                             </View>
                         </View>
 
@@ -28,9 +67,9 @@ const SearchResultCard = () => {
                     </View>
                     <View style={{ position: 'absolute', bottom: 0, padding: 10 }}>
                         <Text style={{ color: '#FFFFFF', fontSize: 11, lineHeight: 16, fontFamily: 'Poppins', fontWeight: 800 }}>
-                            Traditional spare ribs baked</Text>
+                            {data?.name}</Text>
                         <Text style={{ color: '#A9A9A9', fontSize: 8, lineHeight: 12, fontFamily: 'Poppins', fontWeight: 400 }}>
-                            By Chef John</Text>
+                            By Chef {data?.chef}</Text>
                     </View>
 
                 </LinearGradient>

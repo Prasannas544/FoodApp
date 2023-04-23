@@ -13,6 +13,8 @@ import SavedRecipe from './pages/SavedRecipe'
 import Notifications from './pages/Notifications'
 import Profile from './pages/Profile'
 import Recipe_Ingredient from './pages/Recipe_Ingredient'
+import store from './redux/store';
+import { Provider } from 'react-redux'
 
 const Stack = createStackNavigator()
 
@@ -20,24 +22,24 @@ const App = () => {
 
 
   return (
+    <Provider store={store}>
+      <NavigationContainer>
+        <Stack.Navigator  >
 
-    <NavigationContainer>
-      <Stack.Navigator  >
+          <Stack.Screen name="SplashScreen" component={SplashScreen} options={{ headerShown: false }} />
+          <Stack.Screen name="Notifications" component={Notifications} options={{ headerShown: false }} />
+          <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
+          <Stack.Screen name="SignUp" component={SignUp} options={{ headerShown: false }} />
+          <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
+          <Stack.Screen name="Recipe_Ingredient" component={Recipe_Ingredient} options={{ headerShown: false }} />
+          <Stack.Screen name="Profile" component={Profile} options={{ headerShown: false }} />
+          <Stack.Screen name="SavedRecipe" component={SavedRecipe} options={{ headerShown: false }} />
+          <Stack.Screen name="SearchResult" component={SearchResult} options={{ headerShown: false }} />
+          <Stack.Screen name="Search" component={Search} options={{ headerShown: false }} />
 
-        <Stack.Screen name="SplashScreen" component={SplashScreen} options={{ headerShown: false }} />
-        <Stack.Screen name="Notifications" component={Notifications} options={{ headerShown: false }} />
-        <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
-        <Stack.Screen name="SignUp" component={SignUp} options={{ headerShown: false }} />
-        <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
-      <Stack.Screen name="Recipe_Ingredient" component={Recipe_Ingredient} options={{ headerShown: false }} />
-        <Stack.Screen name="Profile" component={Profile} options={{ headerShown: false }} />
-        <Stack.Screen name="SavedRecipe" component={SavedRecipe} options={{ headerShown: false }} />
-        <Stack.Screen name="SearchResult" component={SearchResult} options={{ headerShown: false }} />
-        <Stack.Screen name="Search" component={Search} options={{ headerShown: false }} />
-
-      </Stack.Navigator>
-    </NavigationContainer>
-
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
   )
 }
 
