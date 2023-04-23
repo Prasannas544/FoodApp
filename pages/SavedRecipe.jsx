@@ -1,15 +1,17 @@
 import { View, Text, TouchableOpacity, Image, ScrollView } from 'react-native'
 import React, { useState } from 'react'
 import { ImageBackground } from 'react-native'
-import SavedRecipeCard from './SavedRecipeCard'
+import { useSelector, useDispatch } from 'react-redux';
 
+
+import SavedRecipeCard from './SavedRecipeCard'
 import data from '../data/data.json'
 
 const SavedRecipe = ({ navigation }) => {
+    const bookmarks = useSelector(state => state.bookmark.value);
+    let filtered = data.filter(f => bookmarks.includes(f.name))
+    const [savedRecipes, setSavedRecipes] = useState(filtered)
 
-    const [savedRecipes, setSavedRecipes] = useState(data)
-
-    
 
     return (
         <View style={{ flex: 1, backgroundColor: '#FFF' }}>

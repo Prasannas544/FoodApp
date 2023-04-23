@@ -1,14 +1,28 @@
 import { View, Text, Image, ScrollView, TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
-import RecipeCard from './RecipeCard'
-import ProcedureCard from './ProcedureCard'
 import Modal from 'react-native-modal'
 import { useClipboard } from '@react-native-community/clipboard'
+import { useSelector, useDispatch } from 'react-redux';
+import { addBm, removeBm } from '../redux/reducers/BookmarkSlice';
+
+import RecipeCard from './RecipeCard'
+import ProcedureCard from './ProcedureCard'
 import IngredientCard from './IngredientCard'
 
 const Recipe_Ingredient = ({ navigation, route }) => {
-    const [clipboard_value, setString] = useClipboard();
+    const bookmarks = useSelector(state => state.bookmark.value);
+    const dispatch = useDispatch();
 
+
+    const addBookmark = () => {
+        dispatch(addBm(route.params.name))
+    }
+    const removeBookmark = () => {
+        dispatch(removeBm(route.params.name))
+    }
+
+
+    const [clipboard_value, setString] = useClipboard();
     const [filter, setfilter] = useState(['Ingredient', 'Procedure'])
     const [selectedF, setselectedF] = useState('Ingredient')
     const [ingredients, setingredients] = useState([1, 2, 3, 4, 5, 6, 7])
@@ -45,7 +59,7 @@ const Recipe_Ingredient = ({ navigation, route }) => {
             </View>
             <View>
                 <View style={{ paddingTop: 10, borderRadius: 10 }}>
-                    <RecipeCard data={route.params} />
+                    <RecipeCard data={route.params} addBookmark={addBookmark} />
                 </View>
 
                 <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', paddingTop: 10, width: '100%' }}>
@@ -118,7 +132,8 @@ const Recipe_Ingredient = ({ navigation, route }) => {
                     <Image source={require('../assets/Icon.png')} style={{ width: 17, marginRight: 5 }} resizeMode='contain' />
                     <Text >1 serve</Text>
                 </View>
-                <Text>{route.params.ingredients.length}</Text>
+                {selectedF == 'Ingredient' ? <Text>{route.params.ingredients.length} Items</Text> :
+                    <Text>{route.params.procedure.length} Steps</Text>}
             </View>
             <ScrollView style={{ flex: 2 }} showsVerticalScrollIndicator={false} vertical={true} contentContainerStyle={{ alignItems: 'center', paddingBottom: 50 }}>
                 {selectedF == 'Ingredient' ?
@@ -176,7 +191,7 @@ const Recipe_Ingredient = ({ navigation, route }) => {
 
                         </View>
                     </TouchableOpacity>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={() => removeBookmark()}>
 
                         <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                             <Image source={require('../assets/Activeicn.png')} style={{ width: 20, height: 20 }} />

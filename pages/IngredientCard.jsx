@@ -4,7 +4,7 @@ import React from 'react'
 const IngredientCard = ({ ing }) => {
     return (
         <View style={{
-            width: '100%', height: 76, opacity: 0.8, backgroundColor: '#D9D9D9', borderRadius: 12, paddingVertical: 12,
+            width: '100%', height: 76, backgroundColor: '#D9D9D9', borderRadius: 12, paddingVertical: 12,
             display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexDirection: 'row', paddingHorizontal: 15
         }}>
             <View style={{

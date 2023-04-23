@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { useDispatch, useSelector, Provider } from 'react-redux';
-import counterReducer from './reducers/CounterSlice';
+import bookmarkReducer from './reducers/BookmarkSlice';
 
 export default configureStore({
-  reducer: {
-    counter: counterReducer,
-  },
+    reducer: {
+        bookmark: bookmarkReducer,
+    },
 });
