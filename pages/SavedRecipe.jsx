@@ -1,5 +1,5 @@
-import { View, Text, TouchableOpacity, Image, ScrollView, PanResponder } from 'react-native'
-import React, { useRef, useState } from 'react'
+import { View, Text, TouchableOpacity, Image, ScrollView, PanResponder, TouchableWithoutFeedback } from 'react-native'
+import React, { useState } from 'react'
 import { ImageBackground } from 'react-native'
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -12,32 +12,18 @@ const SavedRecipe = ({ navigation }) => {
     let filtered = data.filter(f => bookmarks.includes(f.name))
     const [savedRecipes, setSavedRecipes] = useState(filtered)
 
-    const scrollViewRef = useRef(null);
-    const [lastTapTime, setLastTapTime] = useState(0);
 
+    var lastTap = null;
+    handleDoubleTap = () => {
+        const now = Date.now();
+        if (lastTap && (now - lastTap) < 300) {
+            navigation.navigate('Recipe_Ingredient',data)
+            // Handle double tap event
+        } else {
+            lastTap = now;
+        }
+    };
 
-    const panResponder = useRef(
-        PanResponder.create({
-            onStartShouldSetPanResponder: () => true,
-            onPanResponderTerminationRequest: () => false,
-            onPanResponderRelease: (evt, gestureState) => {
-                // Calculate the time elapsed since the last tap
-                const currentTime = Date.now();
-                const timeElapsed = currentTime - lastTapTime;
-
-                // If the tap count is 2 and the time elapsed is less than 500ms, it's a double tap
-                if (timeElapsed < 500) {
-                    navigation.navigate('Recipe_Ingredient',data)
-                    console.log('Double tap detected!');
-                    // Reset tap count and last tap time
-                    setLastTapTime(0);
-                } else {
-                    // Update tap count and last tap time
-                    setLastTapTime(currentTime);
-                }
-            },
-        })
-    ).current;
 
 
     return (
@@ -51,10 +37,10 @@ const SavedRecipe = ({ navigation }) => {
 
                 <View style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
 
-                    <ScrollView ref={scrollViewRef} showsVerticalScrollIndicator={false} vertical={true} contentContainerStyle={{ paddingBottom: 150, alignItems: 'center' }} >
+                    <ScrollView showsVerticalScrollIndicator={false} vertical={true} contentContainerStyle={{ paddingBottom: 150, alignItems: 'center' }} >
                         {savedRecipes.map((item, i) => {
                             return (
-                                <TouchableOpacity style={{ marginVertical: 10 }} key={i}  {...panResponder.panHandlers}>
+                                <TouchableOpacity activeOpacity={1} onPress={handleDoubleTap} style={{ marginVertical: 10 }} key={i} >
                                     <SavedRecipeCard data={item} />
                                 </TouchableOpacity>)
                         })}

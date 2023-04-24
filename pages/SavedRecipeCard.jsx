@@ -1,9 +1,8 @@
-import { View, Text, ImageBackground, PanResponder, Image, TouchableOpacity } from 'react-native'
+import { View, Text, ImageBackground, Image, TouchableOpacity } from 'react-native'
 import React from 'react'
 import LinearGradient from 'react-native-linear-gradient';
 import { useNavigation } from '@react-navigation/native';
 
-const DOUBLE_TAP_DELAY = 300; // in milliseconds
 var img
 const SavedRecipeCard = ({ data }) => {
 

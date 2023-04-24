@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, TextInput, Image, ScrollView, Button, FlatList, PanResponder } from 'react-native'
+import { View, Text, TouchableOpacity, TextInput, Image, ScrollView, Button, FlatList, PanResponder, TouchableWithoutFeedback } from 'react-native'
 import React, { useState, useRef } from 'react'
 import SearchResultCard from './SearchResultCard'
 import Modal from "react-native-modal";
@@ -66,37 +66,21 @@ const Search = ({ navigation }) => {
             setselectedtime(array);
         }
     }
+    var lastTap = null;
+    handleDoubleTap = () => {
+        const now = Date.now();
+        if (lastTap && (now - lastTap) < 300) {
+            // Handle double tap event
+            navigation.navigate('Recipe_Ingredient',data)
+        } else {
+            lastTap = now;
+        }
+    };
 
-    const scrollViewRef = useRef(null);
-    const [lastTapTime, setLastTapTime] = useState(0);
 
-
-    const panResponder = useRef(
-        PanResponder.create({
-            onStartShouldSetPanResponder: () => true,
-            onPanResponderTerminationRequest: () => false,
-            onPanResponderRelease: (evt, gestureState) => {
-                // Calculate the time elapsed since the last tap
-                const currentTime = Date.now();
-                const timeElapsed = currentTime - lastTapTime;
-
-                // If the tap count is 2 and the time elapsed is less than 500ms, it's a double tap
-                if (timeElapsed < 500) {
-                    navigation.navigate('Recipe_Ingredient', data)
-                    console.log('Double tap detected!');
-                    // Reset tap count and last tap time
-                    setLastTapTime(0);
-                } else {
-                    // Update tap count and last tap time
-                    console.log(' tap detected!');
-                    setLastTapTime(currentTime);
-                }
-            },
-        })
-    ).current;
 
     const renderItem = ({ item }) => (
-        <TouchableOpacity {...panResponder.panHandlers}>
+        <TouchableOpacity activeOpacity={1}  onPress={handleDoubleTap}>
             <SearchResultCard data={item} />
         </TouchableOpacity>
     );
@@ -138,7 +122,6 @@ const Search = ({ navigation }) => {
                         }}>269 results</Text>
                     </View>
                     <FlatList
-                        ref={scrollViewRef}
                         style={{ height: '79%' }}
                         data={recentSearch}
                         renderItem={renderItem}
