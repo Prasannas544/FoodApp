@@ -1,13 +1,15 @@
 import { View, Text, TouchableOpacity, Image, ScrollView, PanResponder, TouchableWithoutFeedback } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { ImageBackground } from 'react-native'
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 
 import SavedRecipeCard from './SavedRecipeCard'
 import data from '../data/data.json'
 
 const SavedRecipe = ({ navigation }) => {
+
+    
     const bookmarks = useSelector(state => state.bookmark.value);
     let filtered = data.filter(f => bookmarks.includes(f.name))
     const [savedRecipes, setSavedRecipes] = useState(filtered)
@@ -16,7 +18,6 @@ const SavedRecipe = ({ navigation }) => {
             <View style={{ paddingHorizontal: 30, paddingTop: 10 }}>
                 <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
                     <Text style={{ fontFamily: 'Poppins', fontSize: 18, fontWeight: 800, lineHeight: 27, color: '#121212', marginLeft: -5 }}>Saved Recipes</Text>
-                    <View></View>
                 </View>
 
 
@@ -25,7 +26,7 @@ const SavedRecipe = ({ navigation }) => {
                     <ScrollView showsVerticalScrollIndicator={false} vertical={true} contentContainerStyle={{ paddingBottom: 150, alignItems: 'center' }} >
                         {savedRecipes.length > 0 ? savedRecipes.map((item, i) => {
                             return (
-                                    <SavedRecipeCard data={item} />
+                                    <SavedRecipeCard data={item} setSavedRecipes={setSavedRecipes} />
                             )
                         }) :
                             <View>

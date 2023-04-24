@@ -11,26 +11,23 @@ import ProcedureCard from './ProcedureCard'
 import IngredientCard from './IngredientCard'
 
 const Recipe_Ingredient = ({ navigation, route }) => {
-    const bookmarks = useSelector(state => state.bookmark.value);
+    const bookmarks= useSelector(state => state.bookmark.value);
     const dispatch = useDispatch();
-
-
-    const addBookmark = () => {
-        dispatch(addBm(route.params.name))
-    }
-    const removeBookmark = () => {
-        dispatch(removeBm(route.params.name))
-
-    }
-
-
     const [clipboard_value, setString] = useClipboard();
+
     const [filter, setfilter] = useState(['Ingredient', 'Procedure'])
     const [selectedF, setselectedF] = useState('Ingredient')
     const [showModal, setShowModal] = useState(false)
     const [showRateModal, setShowRateModal] = useState(false)
     const [rating, setRating] = useState(5)
     const [showShareModal, setShowShareModal] = useState(false)
+
+    const addBookmark = () => {
+        dispatch(addBm(route.params.name))
+    }
+    const removeBookmark = () => {
+        dispatch(removeBm(route.params.name));
+    }
 
     const toggleModal = () => {
         setShowModal(!showModal);
@@ -43,7 +40,7 @@ const Recipe_Ingredient = ({ navigation, route }) => {
     };
 
     const copyToClipboard = () => {
-        let text = 'www.gulugulu' //url goes here
+        let text = 'www.applink_here.com' //url goes here
         setString(text);
         console.log(clipboard_value)
     };
@@ -187,7 +184,7 @@ const Recipe_Ingredient = ({ navigation, route }) => {
 
                         </View>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => { removeBookmark(); navigation.navigate('SavedRecipe') }}>
+                    <TouchableOpacity onPress={() => { toggleModal(); removeBookmark() }}>
 
                         <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                             <Image source={require('../assets/Activeicn.png')} style={{ width: 20, height: 20 }} />
@@ -230,7 +227,7 @@ const Recipe_Ingredient = ({ navigation, route }) => {
                         </TouchableOpacity>
                     </View>
 
-                    <TouchableOpacity onPress={() => { dispatch(addRating(route.params.name, rating)) }}>
+                    <TouchableOpacity onPress={() => { dispatch(addRating(route.params.name, rating)); toggleRateModal(); }}>
 
                         <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                             <Text style={{
@@ -266,7 +263,7 @@ const Recipe_Ingredient = ({ navigation, route }) => {
                             <Text style={{ flex: 0.7, fontSize: 11, lineHeight: 16, fontWeight: 600, fontFamily: 'Poppins', color: '#121212' }}>url linke here sliced </Text>
                         </View>
 
-                        <TouchableOpacity onPress={() => copyToClipboard()}>
+                        <TouchableOpacity onPress={() => { copyToClipboard(); toggleShareModal(); }}>
                             <View style={{
                                 flex: 0.3, backgroundColor: '#129575', borderRadius: 10,
                                 display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', padding: 15
@@ -285,10 +282,10 @@ const Recipe_Ingredient = ({ navigation, route }) => {
 
 
                 </View>
-            </Modal>
+            </Modal >
 
 
-        </View>
+        </View >
     )
 }
 

@@ -4,7 +4,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import { useNavigation } from '@react-navigation/native';
 
 var img
-const SavedRecipeCard = ({ data }) => {
+const SavedRecipeCard = ({ data,setSavedRecipes }) => {
     const navigation = useNavigation()
     const imageSelector = () => {
         if (data?.img == 'searchR1') {
@@ -75,9 +75,9 @@ const SavedRecipeCard = ({ data }) => {
                                         paddingLeft: 5, paddingRight: 10, textAlign: 'left'
                                     }}>{data.time} mins</Text>
                                     <View>
-                                        <TouchableOpacity style={{ backgroundColor: '#FFF', padding: 4, borderRadius: 50 }}>
+                                        <View style={{ backgroundColor: '#FFF', padding: 4, borderRadius: 50 }}>
                                             <Image source={require('../assets/Bookmarked.png')} style={{ width: 16, height: 16 }} />
-                                        </TouchableOpacity>
+                                        </View>
                                     </View>
                                 </View>
                             </View>

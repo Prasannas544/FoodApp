@@ -5,7 +5,8 @@ const bookmarkSlice = createSlice({
   initialState: { value: [] },
   reducers: {
     addBm: (state, action) => {
-      state.value.push(action.payload);
+      if (!state.value.includes(action.payload))
+        state.value.push(action.payload);
     },
     removeBm: (state, action) => {
       let array = [...state.value]

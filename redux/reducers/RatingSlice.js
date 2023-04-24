@@ -4,10 +4,10 @@ const ratingSlice = createSlice({
   name: 'rating',
   initialState: { value:[] },
   reducers: {
-    addBm: (state, action) => {
+    addRating: (state, action) => {
       state.value.push(action.payload);
     },
-    removeBm: (state, action) => {
+    removeRating: (state, action) => {
       let array = [...state.value]
       const index = array.indexOf(action.payload.name);
       if (index > -1) {

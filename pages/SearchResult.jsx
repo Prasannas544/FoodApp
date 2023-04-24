@@ -66,18 +66,6 @@ const Search = ({ navigation }) => {
             setselectedtime(array);
         }
     }
-    var lastTap = null;
-    handleDoubleTap = () => {
-        const now = Date.now();
-        if (lastTap && (now - lastTap) < 300) {
-            // Handle double tap event
-            navigation.navigate('Recipe_Ingredient',data)
-        } else {
-            lastTap = now;
-        }
-    };
-
-
 
     const renderItem = ({ item }) => (
         

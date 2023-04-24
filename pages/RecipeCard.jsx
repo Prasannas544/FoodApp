@@ -5,7 +5,9 @@ import LinearGradient from 'react-native-linear-gradient';
 var img
 var bm = require('../assets/Activeicn.png')
 const RecipeCard = ({ data, addBookmark, bookmarks }) => {
+    console.log(bookmarks+ "    here     " + data.name)
     const imageSelector = () => {
+        console.log('working')
         if (bookmarks.includes(data.name)) {
             bm=require('../assets/Bookmarked.png')
         }
