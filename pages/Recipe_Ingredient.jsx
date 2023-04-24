@@ -20,6 +20,7 @@ const Recipe_Ingredient = ({ navigation, route }) => {
     }
     const removeBookmark = () => {
         dispatch(removeBm(route.params.name))
+        
     }
 
 
@@ -61,7 +62,7 @@ const Recipe_Ingredient = ({ navigation, route }) => {
             </View>
             <View>
                 <View style={{ paddingTop: 10, borderRadius: 10 }}>
-                    <RecipeCard data={route.params} addBookmark={addBookmark} />
+                    <RecipeCard data={route.params} addBookmark={addBookmark} bookmarks={bookmarks} />
                 </View>
 
                 <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', paddingTop: 10, width: '100%' }}>

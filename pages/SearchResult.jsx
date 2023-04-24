@@ -1,5 +1,5 @@
-import { View, Text, TouchableOpacity, TextInput, Image, ScrollView, Button, FlatList } from 'react-native'
-import React, { useState, useEffect } from 'react'
+import { View, Text, TouchableOpacity, TextInput, Image, ScrollView, Button, FlatList, PanResponder } from 'react-native'
+import React, { useState, useRef } from 'react'
 import SearchResultCard from './SearchResultCard'
 import Modal from "react-native-modal";
 
@@ -66,8 +66,39 @@ const Search = ({ navigation }) => {
             setselectedtime(array);
         }
     }
+
+    const scrollViewRef = useRef(null);
+    const [lastTapTime, setLastTapTime] = useState(0);
+
+
+    const panResponder = useRef(
+        PanResponder.create({
+            onStartShouldSetPanResponder: () => true,
+            onPanResponderTerminationRequest: () => false,
+            onPanResponderRelease: (evt, gestureState) => {
+                // Calculate the time elapsed since the last tap
+                const currentTime = Date.now();
+                const timeElapsed = currentTime - lastTapTime;
+
+                // If the tap count is 2 and the time elapsed is less than 500ms, it's a double tap
+                if (timeElapsed < 500) {
+                    navigation.navigate('Recipe_Ingredient', data)
+                    console.log('Double tap detected!');
+                    // Reset tap count and last tap time
+                    setLastTapTime(0);
+                } else {
+                    // Update tap count and last tap time
+                    console.log(' tap detected!');
+                    setLastTapTime(currentTime);
+                }
+            },
+        })
+    ).current;
+
     const renderItem = ({ item }) => (
-        <SearchResultCard data={item} />
+        <TouchableOpacity {...panResponder.panHandlers}>
+            <SearchResultCard data={item} />
+        </TouchableOpacity>
     );
     return (
         <View style={{ flex: 1 }}>
@@ -106,7 +137,9 @@ const Search = ({ navigation }) => {
                             lineHeight: 16, color: '#A9A9A9',
                         }}>269 results</Text>
                     </View>
-                    <FlatList style={{ height: '79%' }}
+                    <FlatList
+                        ref={scrollViewRef}
+                        style={{ height: '79%' }}
                         data={recentSearch}
                         renderItem={renderItem}
                         numColumns={2}

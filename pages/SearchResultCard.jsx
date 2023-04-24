@@ -4,27 +4,9 @@ import LinearGradient from 'react-native-linear-gradient';
 import { useNavigation } from '@react-navigation/native';
 
 var img = require('../assets/searchR1.png')
-const DOUBLE_TAP_DELAY = 300; // in milliseconds
 
 const SearchResultCard = ({ data }) => {
-    const navigation = useNavigation()
-    const lastTapRef = React.useRef(0);
-
-    const panResponder = React.useRef(
-        PanResponder.create({
-            onStartShouldSetPanResponder: () => true,
-            onPanResponderTerminationRequest: () => false,
-            onPanResponderRelease: (_, gestureState) => {
-                const now = Date.now();
-
-                if (now - lastTapRef.current <= DOUBLE_TAP_DELAY) {
-                    navigation.navigate('Recipe_Ingredient',data)
-                } else {
-                    lastTapRef.current = now;
-                }
-            },
-        })
-    ).current;
+   
 
     const imageSelector = () => {
         if (data?.img == 'searchR1') {
@@ -44,7 +26,7 @@ const SearchResultCard = ({ data }) => {
 
 
     return (
-        <View style={{ borderRadius: 10, overflow: 'hidden' }} {...panResponder.panHandlers} >
+        <View style={{ borderRadius: 10, overflow: 'hidden' }}  >
             <ImageBackground style={{
                 width: 150, height: 150, margin: 7, borderRadius: 10,
             }} source={img}>

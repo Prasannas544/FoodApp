@@ -3,8 +3,12 @@ import React from 'react'
 import LinearGradient from 'react-native-linear-gradient';
 
 var img
-const RecipeCard = ({ data, addBookmark }) => {
+var bm = require('../assets/Activeicn.png')
+const RecipeCard = ({ data, addBookmark, bookmarks }) => {
     const imageSelector = () => {
+        if (bookmarks.includes(data.name)) {
+            bm=require('../assets/Bookmarked.png')
+        }
         if (data?.img == 'searchR1') {
             img = require('../assets/searchR1.png')
         }
@@ -53,7 +57,7 @@ const RecipeCard = ({ data, addBookmark }) => {
                                 }}>{data.time} mins</Text>
                                 <View>
                                     <TouchableOpacity style={{ backgroundColor: '#FFF', padding: 4, borderRadius: 50 }} onPress={() => addBookmark()}>
-                                        <Image source={require('../assets/Bookmarked.png')} style={{ width: 16, height: 16 }} />
+                                        <Image source={bm} style={{ width: 16, height: 16 }} />
                                     </TouchableOpacity>
                                 </View>
                             </View>
