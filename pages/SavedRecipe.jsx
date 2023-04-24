@@ -8,11 +8,14 @@ import SavedRecipeCard from './SavedRecipeCard'
 import data from '../data/data.json'
 
 const SavedRecipe = ({ navigation }) => {
-
-    
     const bookmarks = useSelector(state => state.bookmark.value);
     let filtered = data.filter(f => bookmarks.includes(f.name))
     const [savedRecipes, setSavedRecipes] = useState(filtered)
+
+    useEffect(() => {
+        setSavedRecipes(data.filter(f => bookmarks.includes(f.name)))
+    }, [bookmarks])
+
     return (
         <View style={{ flex: 1, backgroundColor: '#FFF' }}>
             <View style={{ paddingHorizontal: 30, paddingTop: 10 }}>
@@ -26,7 +29,7 @@ const SavedRecipe = ({ navigation }) => {
                     <ScrollView showsVerticalScrollIndicator={false} vertical={true} contentContainerStyle={{ paddingBottom: 150, alignItems: 'center' }} >
                         {savedRecipes.length > 0 ? savedRecipes.map((item, i) => {
                             return (
-                                    <SavedRecipeCard data={item} setSavedRecipes={setSavedRecipes} />
+                                <SavedRecipeCard data={item} setSavedRecipes={setSavedRecipes} />
                             )
                         }) :
                             <View>
