@@ -3,13 +3,14 @@ import React from 'react'
 import LinearGradient from 'react-native-linear-gradient';
 
 var img
-var bm = require('../assets/Activeicn.png')
+var bm
 const RecipeCard = ({ data, addBookmark, bookmarks }) => {
-    console.log(bookmarks+ "    here     " + data.name)
     const imageSelector = () => {
-        console.log('working')
         if (bookmarks.includes(data.name)) {
-            bm=require('../assets/Bookmarked.png')
+
+            bm = require('../assets/Bookmarked.png')
+        } else {
+            bm = require('../assets/Activeicn.png')
         }
         if (data?.img == 'searchR1') {
             img = require('../assets/searchR1.png')
