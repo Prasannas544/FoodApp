@@ -80,9 +80,8 @@ const Search = ({ navigation }) => {
 
 
     const renderItem = ({ item }) => (
-        <TouchableOpacity activeOpacity={1}  onPress={handleDoubleTap}>
+        
             <SearchResultCard data={item} />
-        </TouchableOpacity>
     );
     return (
         <View style={{ flex: 1 }}>

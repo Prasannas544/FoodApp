@@ -20,14 +20,13 @@ const Recipe_Ingredient = ({ navigation, route }) => {
     }
     const removeBookmark = () => {
         dispatch(removeBm(route.params.name))
-        
+
     }
 
 
     const [clipboard_value, setString] = useClipboard();
     const [filter, setfilter] = useState(['Ingredient', 'Procedure'])
     const [selectedF, setselectedF] = useState('Ingredient')
-    const [ingredients, setingredients] = useState([1, 2, 3, 4, 5, 6, 7])
     const [showModal, setShowModal] = useState(false)
     const [showRateModal, setShowRateModal] = useState(false)
     const [rating, setRating] = useState(5)
@@ -188,7 +187,7 @@ const Recipe_Ingredient = ({ navigation, route }) => {
 
                         </View>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => removeBookmark()}>
+                    <TouchableOpacity onPress={() => { removeBookmark(); navigation.navigate('SavedRecipe') }}>
 
                         <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                             <Image source={require('../assets/Activeicn.png')} style={{ width: 20, height: 20 }} />

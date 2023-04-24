@@ -11,21 +11,6 @@ const SavedRecipe = ({ navigation }) => {
     const bookmarks = useSelector(state => state.bookmark.value);
     let filtered = data.filter(f => bookmarks.includes(f.name))
     const [savedRecipes, setSavedRecipes] = useState(filtered)
-
-
-    var lastTap = null;
-    handleDoubleTap = () => {
-        const now = Date.now();
-        if (lastTap && (now - lastTap) < 300) {
-            navigation.navigate('Recipe_Ingredient',data)
-            // Handle double tap event
-        } else {
-            lastTap = now;
-        }
-    };
-
-
-
     return (
         <View style={{ flex: 1, backgroundColor: '#FFF' }}>
             <View style={{ paddingHorizontal: 30, paddingTop: 10 }}>
@@ -38,12 +23,16 @@ const SavedRecipe = ({ navigation }) => {
                 <View style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
 
                     <ScrollView showsVerticalScrollIndicator={false} vertical={true} contentContainerStyle={{ paddingBottom: 150, alignItems: 'center' }} >
-                        {savedRecipes.map((item, i) => {
+                        {savedRecipes.length > 0 ? savedRecipes.map((item, i) => {
                             return (
-                                <TouchableOpacity activeOpacity={1} onPress={handleDoubleTap} style={{ marginVertical: 10 }} key={i} >
                                     <SavedRecipeCard data={item} />
-                                </TouchableOpacity>)
-                        })}
+                            )
+                        }) :
+                            <View>
+                                <Text style={{ fontFamily: 'Poppins', fontSize: 14, fontWeight: 500, lineHeight: 27, color: '#121212' }}>
+                                    No recipes bookmarked !!</Text>
+                            </View>
+                        }
 
 
                     </ScrollView>
